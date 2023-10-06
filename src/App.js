@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const fetchData = async () => {
     try {
-      const response = await fetch('http://16.16.213.168/api');
+      const response = await fetch('/api');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
