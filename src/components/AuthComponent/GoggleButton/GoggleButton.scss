@@ -1,0 +1,16 @@
+.button-google {
+	display: flex;
+	justify-content: center;
+	font-size: 18px;
+
+	button {
+		background-color: #fff;
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		align-items: center;
+		width: 100%;
+		border-radius: 20px;
+		height: 40px;
+	}
+}

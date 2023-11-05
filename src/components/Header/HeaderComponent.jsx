@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import LoginWindow from "../LoginWindow/LoginComponent";
+import LoginComponent from "../AuthComponent/LoginWindow/LoginComponent";
+import RegistrationComponent from "../AuthComponent/RegistrationWindow/RegistrationComponent";
+import { Link, Route } from "react-router-dom";
+import "../AuthComponent/LoginWindow/LoginWindow.scss";
+
 const Header = () => {
-	const [isLoginWindowOpen, setIsLoginWindowOpen] = useState(false);
-
-	const openLoginWindow = () => {
-		setIsLoginWindowOpen(true);
-	};
-
-	const closeLoginWindow = () => {
-		setIsLoginWindowOpen(false);
-	};
-
 	return (
 		<header className="header">
 			<div className="header__container">
@@ -43,12 +37,11 @@ const Header = () => {
 					</svg>
 				</div>
 				<div className="header__login">
-					<a className="header__login-link" href="#" onClick={openLoginWindow}>
-						Log in
-					</a>
+					<Link to="login" className="header__login-link">
+						Log In
+					</Link>
 				</div>
 			</div>
-			<LoginWindow isOpen={isLoginWindowOpen} onClose={closeLoginWindow} />
 		</header>
 	);
 };
