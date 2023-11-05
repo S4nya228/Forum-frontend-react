@@ -103,13 +103,11 @@ const LoginComponent = () => {
 						New to Connectopium? <Link to="/register">Sign Up</Link>
 					</span>
 				</div>
-
 				<div className="login-window__remember-password">
 					<span>
-						Forgot your<a href="#"> password</a>?
+						Forgot your <Link to="/forgot_password">password</Link>?
 					</span>
 				</div>
-
 				<button
 					className="login-window__button-login"
 					type="button"

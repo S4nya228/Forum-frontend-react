@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import LoginComponent from "../AuthComponent/LoginWindow/LoginComponent";
-import RegistrationComponent from "../AuthComponent/RegistrationWindow/RegistrationComponent";
-import { Link, Route } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import "../AuthComponent/LoginWindow/LoginWindow.scss";
 
 const Header = () => {

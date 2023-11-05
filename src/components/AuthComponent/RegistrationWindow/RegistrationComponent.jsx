@@ -235,7 +235,7 @@ const RegistrationComponent = () => {
 					)}
 				</div>
 				<button
-					className="registration-window__button-login"
+					className="registration-window__button-register"
 					type="button"
 					onClick={handleRegistration}
 				>
