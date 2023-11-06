@@ -14,7 +14,7 @@ export function validatePassword(password) {
 
 export function validateEmail(email) {
 	if (!email || !/\S+@\S+\.\S+/.test(email)) {
-		return `The email address must contain the @ sign. Email address "${email}" does not contain the @ sign.`;
+		return `Email address "${email}" does not contain the @ sign.`;
 	}
 	return null;
 }
