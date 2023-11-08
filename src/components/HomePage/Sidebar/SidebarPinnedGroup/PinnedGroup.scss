@@ -1,0 +1,65 @@
+.pinned-group {
+	display: flex;
+	width: 280px;
+	padding: 20px 25px 20px 20px;
+	border-radius: 16px;
+	background: #262d34;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 24px;
+
+		a {
+			text-decoration: none;
+			color: #fff;
+		}
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		width: 250px;
+		padding: 6px 5px;
+		border-radius: 6px;
+		gap: 10px;
+		cursor: pointer;
+
+		&:hover {
+			background: #2c353d;
+		}
+	}
+
+	&__logo {
+		display: flex;
+		padding: 6px;
+		border-radius: 4px;
+	}
+
+	&__info-box {
+	}
+
+	&__name {
+		color: #fff;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 18px;
+	}
+
+	&__description {
+		font-size: 12px;
+		color: #97989d;
+	}
+}

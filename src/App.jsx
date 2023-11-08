@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header/HeaderComponent";
-import HomePage from "./components/HomePage/HomePageComponent";
-import LoginComponent from "./components/AuthComponent/LoginWindow/LoginComponent";
-import RegistrationComponent from "./components/AuthComponent/RegistrationWindow/RegistrationComponent";
-import ForgotPassword from "./components/AuthComponent/ForgotPassword/ForgotPasswordComponent";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Header from './components/Header/Header'
+import HomePage from './components/HomePage/HomePage'
+import LoginComponent from './components/AuthComponent/LoginWindow/LoginWindow'
+import RegistrationComponent from './components/AuthComponent/RegistrationWindow/RegistrationWindow'
+import ForgotPassword from './components/AuthComponent/ForgotPassword/ForgotPassword'
 
-import "./components/Header/Header.scss";
-import "./components/HomePage/HomePage.scss";
+import './components/Header/Header.scss'
+import './components/HomePage/HomePage.scss'
 
 function App() {
 	return (
@@ -21,7 +21,7 @@ function App() {
 				<HomePage />
 			</div>
 		</BrowserRouter>
-	);
+	)
 }
 
-export default App;
+export default App

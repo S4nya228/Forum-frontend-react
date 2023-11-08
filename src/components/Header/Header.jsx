@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../AuthComponent/LoginWindow/LoginWindow.scss";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import '../AuthComponent/LoginWindow/LoginWindow.scss'
 
 const Header = () => {
 	return (
@@ -8,7 +8,7 @@ const Header = () => {
 			<div className="header__container">
 				<div className="header__logo">
 					<div className="header__logo-img">
-						<img src="/logo.jpg" alt="logo" />
+						<img src="/image/logo.jpg" alt="logo" />
 					</div>
 					<div className="header__logo-name">Connectopium</div>
 				</div>
@@ -41,7 +41,7 @@ const Header = () => {
 				</div>
 			</div>
 		</header>
-	);
-};
+	)
+}
 
-export default Header;
+export default Header
