@@ -4,12 +4,19 @@
 
 	&__container {
 		display: flex;
+		gap: 20px;
 		width: 95.5%;
 		margin: 0 auto;
 		padding-top: 30px;
 	}
 
 	&__sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	&__main {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
