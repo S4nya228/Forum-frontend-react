@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../CreatePost/CreatePost.scss'
 
 const CreatePost = () => {
@@ -6,9 +7,9 @@ const CreatePost = () => {
 		<div className="create-post">
 			<div className="create-post__container">
 				<div className="create-post__icon">
-					<a href="#">
+					<Link to="/myAcc">
 						<img src="/image/Avatar.svg" alt="avatar" />
-					</a>
+					</Link>
 				</div>
 				<div className="create-post__input-data">
 					<input

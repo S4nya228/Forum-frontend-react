@@ -1,7 +1,10 @@
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const usePostCardHooks = () => {
 	const textareaRef = useRef()
+	const navigate = useNavigate()
+	const [isListOpen, setIsListOpen] = useState(false)
 
 	const setTextareaHeight = useCallback(() => {
 		const textarea = textareaRef.current
@@ -37,11 +40,53 @@ const usePostCardHooks = () => {
 		}
 	}, [handleTextareaInput])
 
+	const handleBack = () => {
+		navigate('/post')
+	}
+
+	const stopPropagation = useCallback((event) => {
+		event.stopPropagation()
+	}, [])
+
+	const toggleList = useCallback(() => {
+		setIsListOpen((prevIsListOpen) => !prevIsListOpen)
+	}, [])
+
+	const closeList = useCallback(() => {
+		setIsListOpen(false)
+	}, [])
+
+	const handleButtonClickWithTwoEvents = useCallback(
+		(event) => {
+			stopPropagation(event)
+			toggleList()
+		},
+		[stopPropagation, toggleList]
+	)
+
+	useEffect(() => {
+		// Додаємо обробник кліка на весь документ
+		const handleClickOutside = (event) => {
+			if (isListOpen && !event.target.closest('.link-post__another')) {
+				closeList()
+			}
+		}
+
+		// Додаємо обробник кліка при монтуванні компонента
+		document.addEventListener('click', handleClickOutside)
+
+		// Видаляємо обробник кліка при розмонтовуванні компонента
+		return () => {
+			document.removeEventListener('click', handleClickOutside)
+		}
+	}, [isListOpen, closeList])
+
 	return {
 		textareaRef,
-		handleButtonClick: (e) => {
-			e.preventDefault()
-		},
+		isListOpen,
+		handleBack,
+		stopPropagation,
+		handleButtonClickWithTwoEvents,
 	}
 }
 

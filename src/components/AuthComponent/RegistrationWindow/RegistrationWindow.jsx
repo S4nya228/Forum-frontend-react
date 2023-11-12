@@ -1,66 +1,66 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import GoogleButton from "../GoggleButton/GoggleButton";
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import GoogleButton from '../GoggleButton/GoggleButton'
 import {
 	validateEmail,
 	validateName,
 	validatePasswordComplexity,
-} from "../Validation/ValidationAuth";
-import "../RegistrationWindow/RegistrationWindow.scss";
+} from '../Validation/ValidationAuth'
+import '../RegistrationWindow/RegistrationWindow.scss'
 
 const RegistrationComponent = () => {
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	const handleBack = () => {
-		navigate("/");
-	};
+		navigate('/')
+	}
 
 	const [registerForm, setRegisterForm] = useState({
-		email: "",
-		name: "",
-		password: "",
-		confirmPassword: "",
-	});
-	const [registrationStep, setRegistrationStep] = useState(1);
-	const isRegistrationStep2 = registrationStep === 2;
-	const [error, setError] = useState(null);
+		email: '',
+		name: '',
+		password: '',
+		confirmPassword: '',
+	})
+	const [registrationStep, setRegistrationStep] = useState(1)
+	const isRegistrationStep2 = registrationStep === 2
+	const [error, setError] = useState(null)
 
 	const handleRegistration = () => {
-		const errors = {};
+		const errors = {}
 
 		if (registrationStep === 1) {
-			const emailError = validateEmail(registerForm.email);
+			const emailError = validateEmail(registerForm.email)
 			if (emailError) {
-				errors.email = emailError;
+				errors.email = emailError
 			}
 		} else if (registrationStep === 2) {
-			const nameError = validateName(registerForm.name);
+			const nameError = validateName(registerForm.name)
 			if (nameError) {
-				errors.name = nameError;
+				errors.name = nameError
 			}
 			const passwordComplexityError = validatePasswordComplexity(
 				registerForm.password
-			);
+			)
 			if (passwordComplexityError) {
-				errors.password = passwordComplexityError;
+				errors.password = passwordComplexityError
 			}
 			if (registerForm.password !== registerForm.confirmPassword) {
-				errors.confirmPassword = "Passwords do not match.";
+				errors.confirmPassword = 'Passwords do not match.'
 			}
 		}
 
 		if (Object.keys(errors).length === 0) {
-			setError(null);
+			setError(null)
 			if (registrationStep === 1) {
 				// Якщо це перший крок, змінюємо на другий
-				setRegistrationStep(2);
+				setRegistrationStep(2)
 			} else {
 				// Робіть реєстрацію або іншу логіку для другого кроку
 			}
 		} else {
-			setError(errors);
+			setError(errors)
 		}
-	};
+	}
 
 	return (
 		<div className="registration-window">
@@ -93,15 +93,15 @@ const RegistrationComponent = () => {
 				)}
 				<div className="registration-window__name">
 					{!isRegistrationStep2
-						? "Sign Up"
-						: "Create your username and password"}
+						? 'Sign Up'
+						: 'Create your username and password'}
 				</div>
 				<div className="registration-window__description">
 					{!isRegistrationStep2 ? (
 						<span>
-							By continuing, you agree to our <a href="#">User Agreement</a> and
-							acknowledge that you understand the <a href="#">Privacy Policy</a>
-							.
+							By continuing, you agree to our{' '}
+							<Link to="/agreement">User Agreement</Link> and acknowledge that
+							you understand the <Link to="/policy">Privacy Policy</Link>.
 						</span>
 					) : (
 						<span>
@@ -120,7 +120,7 @@ const RegistrationComponent = () => {
 						<div className="registration-window__email">
 							<div
 								className={`registration-window__input-container ${
-									error && error.email ? "invalid-container" : ""
+									error && error.email ? 'invalid-container' : ''
 								}`}
 							>
 								<input
@@ -149,7 +149,7 @@ const RegistrationComponent = () => {
 						<div className="registration-window__name-for-registration">
 							<div
 								className={`registration-window__input-container ${
-									error && error.name ? "invalid-container" : ""
+									error && error.name ? 'invalid-container' : ''
 								}`}
 							>
 								<input
@@ -175,7 +175,7 @@ const RegistrationComponent = () => {
 						<div className="registration-window__password">
 							<div
 								className={`registration-window__input-container ${
-									error && error.password ? "invalid-container" : ""
+									error && error.password ? 'invalid-container' : ''
 								}`}
 							>
 								<input
@@ -200,7 +200,7 @@ const RegistrationComponent = () => {
 						<div className="registration-window__confirmed-password">
 							<div
 								className={`registration-window__input-container ${
-									error && error.confirmPassword ? "invalid-container" : ""
+									error && error.confirmPassword ? 'invalid-container' : ''
 								}`}
 							>
 								<input
@@ -216,7 +216,7 @@ const RegistrationComponent = () => {
 									}
 									required
 									className={
-										error && error.confirmPassword ? "invalid-input" : ""
+										error && error.confirmPassword ? 'invalid-input' : ''
 									}
 								/>
 								<label htmlFor="confirm-password-label">Confirm Password</label>
@@ -239,11 +239,11 @@ const RegistrationComponent = () => {
 					type="button"
 					onClick={handleRegistration}
 				>
-					{isRegistrationStep2 ? "Register" : "Continue"}
+					{isRegistrationStep2 ? 'Register' : 'Continue'}
 				</button>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default RegistrationComponent;
+export default RegistrationComponent

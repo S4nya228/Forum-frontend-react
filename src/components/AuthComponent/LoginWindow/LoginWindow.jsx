@@ -1,40 +1,40 @@
-import React, { useState } from "react";
-import GoogleButton from "../GoggleButton/GoggleButton";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import GoogleButton from '../GoggleButton/GoggleButton'
+import { Link, useNavigate } from 'react-router-dom'
 import {
 	validateUsername,
 	validatePassword,
-} from "../Validation/ValidationAuth";
-import "../LoginWindow/LoginWindow.scss";
+} from '../Validation/ValidationAuth'
+import '../LoginWindow/LoginWindow.scss'
 
 const LoginComponent = () => {
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	const handleBack = () => {
-		navigate("/");
-	};
-	const [loginForm, setLoginForm] = useState({ username: "", password: "" });
-	const [error, setError] = useState(null);
+		navigate('/')
+	}
+	const [loginForm, setLoginForm] = useState({ username: '', password: '' })
+	const [error, setError] = useState(null)
 
 	const handleLogin = () => {
-		const errors = {};
+		const errors = {}
 
-		const usernameError = validateUsername(loginForm.username);
+		const usernameError = validateUsername(loginForm.username)
 		if (usernameError) {
-			errors.username = usernameError;
+			errors.username = usernameError
 		}
 
-		const passwordError = validatePassword(loginForm.password);
+		const passwordError = validatePassword(loginForm.password)
 		if (passwordError) {
-			errors.password = passwordError;
+			errors.password = passwordError
 		}
 
 		if (Object.keys(errors).length === 0) {
-			setError(null);
+			setError(null)
 		} else {
-			setError(errors);
+			setError(errors)
 		}
-	};
+	}
 
 	return (
 		<div className="login-window">
@@ -45,8 +45,9 @@ const LoginComponent = () => {
 				<div className="login-window__name">Log In</div>
 				<div className="login-window__description">
 					<span>
-						By continuing, you agree to our <a href="#">User Agreement</a> and
-						acknowledge that you understand the <a href="#">Privacy Policy</a>.
+						By continuing, you agree to our{' '}
+						<Link to="/agreement">User Agreement</Link> and acknowledge that you
+						understand the <Link to="/policy">Privacy Policy</Link>.
 					</span>
 				</div>
 				<GoogleButton />
@@ -55,7 +56,7 @@ const LoginComponent = () => {
 					<div className="login-window__username">
 						<div
 							className={`login-window__input-container ${
-								error && error.username ? "invalid-container" : ""
+								error && error.username ? 'invalid-container' : ''
 							}`}
 						>
 							<input
@@ -78,7 +79,7 @@ const LoginComponent = () => {
 					<div className="login-window__password">
 						<div
 							className={`login-window__input-container ${
-								error && error.password ? "invalid-container" : ""
+								error && error.password ? 'invalid-container' : ''
 							}`}
 						>
 							<input
@@ -117,7 +118,7 @@ const LoginComponent = () => {
 				</button>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default LoginComponent;
+export default LoginComponent

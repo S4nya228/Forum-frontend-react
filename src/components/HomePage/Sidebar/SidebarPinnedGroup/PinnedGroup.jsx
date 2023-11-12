@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import '../SidebarPinnedGroup/PinnedGroup.scss'
 
@@ -7,9 +8,9 @@ const PinnedGroup = () => {
 		<div className="pinned-group">
 			<div className="pinned-group__container">
 				<div className="pinned-group__title">
-					<a href="#">
+					<Link to="/group">
 						Pinned Group <img src="/image/right_arrow.svg" alt="right_arrow" />
-					</a>
+					</Link>
 				</div>
 				<ul className="pinned-group__list">
 					<li className="pinned-group__item">

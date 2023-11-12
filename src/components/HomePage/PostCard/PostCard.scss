@@ -1,12 +1,14 @@
 .link-post {
 	text-decoration: none;
 	display: flex;
+	cursor: pointer;
 	background: #262d34;
 	border-radius: 16px;
 	transition: box-shadow 0s linear;
-
-	&:hover {
-		box-shadow: 0 0 0 0.5px white;
+	&:not(:first-child) {
+		&:hover {
+			box-shadow: 0 0 0 0.5px white;
+		}
 	}
 
 	&__container {
@@ -158,10 +160,8 @@
 
 	&__comments,
 	&__share,
-	&__save,
-	&__another {
+	&__save {
 		text-decoration: none;
-
 		align-items: center;
 		color: #c5d0e6;
 		padding: 10px 9px;
@@ -175,8 +175,7 @@
 	}
 
 	&__share,
-	&__save,
-	&__another {
+	&__save {
 		button {
 			display: flex;
 			align-items: center;
@@ -185,15 +184,47 @@
 		}
 	}
 
-	&__share {
-	}
-
-	&__save {
-	}
-
 	&__another {
+		display: flex;
+		position: relative;
+		align-items: center;
+		border-radius: 6px;
+
+		&:hover {
+			background: #2c353d;
+		}
 		button {
 			font-size: 20px;
+			display: flex;
+			padding: 10px;
+			align-items: center;
+			justify-content: center;
+			color: #c5d0e6;
+		}
+	}
+
+	&__action-list {
+		display: flex;
+		flex-direction: column;
+		background: #262d34;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 1;
+		transition: box-shadow 0s linear;
+		box-shadow: 0 0 0 0.5px white;
+		padding: 5px;
+		width: max-content;
+	}
+
+	&__list-item {
+		color: #fff;
+		padding: 8px 7px;
+		border-radius: 6px;
+		cursor: pointer;
+
+		&:hover {
+			background: #2c353d;
 		}
 	}
 }
