@@ -4,6 +4,7 @@ import HomePage from './components/HomePage/HomePage'
 import LoginComponent from './components/AuthComponent/LoginWindow/LoginWindow'
 import RegistrationComponent from './components/AuthComponent/RegistrationWindow/RegistrationWindow'
 import ForgotPassword from './components/AuthComponent/ForgotPassword/ForgotPassword'
+import Menu from './components/HomePage/MobileMenu/Menu'
 
 import './components/Header/Header.scss'
 import './components/HomePage/HomePage.scss'
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/forgot_password" element={<ForgotPassword />} />
 				</Routes>
 				<HomePage />
+				<Menu />
 			</div>
 		</BrowserRouter>
 	)

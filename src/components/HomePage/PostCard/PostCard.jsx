@@ -136,7 +136,8 @@ const PostCard = () => {
 								onClick={stopPropagation}
 							>
 								<img src="/image/comentIcon.svg" alt="icon comments" />
-								<span>8 Comments</span>
+								<span>8</span>
+								<span>Comments</span>
 							</Link>
 							<div className="link-post__share">
 								<button type="button" onClick={stopPropagation}>
@@ -162,6 +163,10 @@ const PostCard = () => {
 										className="link-post__action-list"
 										onClick={stopPropagation}
 									>
+										<li className="link-post__list-item-save">
+											<img src="/image/savePost.svg" alt="icon save post" />
+											<span>Save</span>
+										</li>
 										<li className="link-post__list-item">Mute group</li>
 										<li className="link-post__list-item">Hide</li>
 										<li className="link-post__list-item">Report</li>

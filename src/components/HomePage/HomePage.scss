@@ -1,24 +1,65 @@
 .home-page {
 	width: 100%;
-	background-color: #1e252b;
+	margin-top: 80px;
+	padding: 0 0 20px 0;
 
 	&__container {
 		display: flex;
+		justify-content: space-between;
 		gap: 20px;
-		width: 95.5%;
+		width: 100%;
+		max-width: 1540px;
 		margin: 0 auto;
 		padding-top: 30px;
+
+		transition: width 0.3s ease;
+
+		@media (max-width: 1580px) {
+			width: 96%;
+		}
+
+		@media (max-width: 768px) {
+			width: 100%;
+			padding-top: 15px;
+			padding-bottom: 50px;
+		}
 	}
 
 	&__sidebar {
 		display: flex;
+		min-width: clamp(20.5rem, 2.5vw, 25.5rem);
 		flex-direction: column;
 		gap: 20px;
+
+		@media (max-width: 960px) {
+			display: none;
+		}
 	}
 
 	&__main {
 		display: flex;
 		flex-direction: column;
+		width: clamp(15.625rem, 60%, 55.125rem);
 		gap: 20px;
+
+		@media (max-width: 1200px) {
+			width: 100%;
+		}
+
+		@media (min-width: 960px) {
+			.trends {
+				display: none;
+			}
+		}
+	}
+
+	&__aside {
+		display: flex;
+		width: 350px;
+		flex-direction: column;
+
+		@media (max-width: 1200px) {
+			display: none;
+		}
 	}
 }

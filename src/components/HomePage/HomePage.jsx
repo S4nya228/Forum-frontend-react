@@ -5,6 +5,7 @@ import PopularTags from './Sidebar/SidebarPopularTags/PopularTags'
 import PinnedGroup from './Sidebar/SidebarPinnedGroup/PinnedGroup'
 import CreatePost from './CreatePost/CreatePost'
 import PostCard from './PostCard/PostCard'
+import Aside from './Aside/Aside'
 
 const HomePage = () => {
 	return (
@@ -16,8 +17,12 @@ const HomePage = () => {
 					<PinnedGroup />
 				</div>
 				<div className="home-page__main">
+					<Trends />
 					<CreatePost />
 					<PostCard />
+				</div>
+				<div className="home-page__aside">
+					<Aside />
 				</div>
 			</div>
 		</div>
