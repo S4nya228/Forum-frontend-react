@@ -11,6 +11,7 @@ const PostCard = () => {
 		stopPropagation,
 		handleButtonClickWithTwoEvents,
 		isListOpen,
+		getDropdownStyles,
 	} = usePostCardHooks()
 
 	return (
@@ -162,6 +163,7 @@ const PostCard = () => {
 									<ul
 										className="link-post__action-list"
 										onClick={stopPropagation}
+										style={getDropdownStyles()}
 									>
 										<li className="link-post__list-item-save">
 											<img src="/image/savePost.svg" alt="icon save post" />

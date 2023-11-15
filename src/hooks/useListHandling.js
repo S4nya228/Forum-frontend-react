@@ -25,7 +25,37 @@ const useListHandling = () => {
 		}
 	}, [isListOpen, closeList])
 
-	return { isListOpen, toggleList }
+	const openDirection = () => {
+		const button = document.querySelector('.link-post__another button')
+		const buttonRect = button.getBoundingClientRect()
+		const screenHeight = window.innerHeight
+
+		if (buttonRect.top < screenHeight / 2) {
+			// If the button is closer to the top half of the screen
+			return 'down'
+		} else {
+			// If the button is closer to the bottom half of the screen
+			return 'up'
+		}
+	}
+
+	const getDropdownStyles = () => {
+		const direction = openDirection()
+
+		if (direction === 'down') {
+			return {
+				top: '100%',
+				left: 0,
+			}
+		} else {
+			return {
+				bottom: '100%',
+				left: 0,
+			}
+		}
+	}
+
+	return { isListOpen, toggleList, getDropdownStyles }
 }
 
 export default useListHandling
