@@ -1,9 +1,3 @@
-<svg width="25" height="23" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="50" height="50" fill="url(#pattern0)"/>
-<defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_12_2840" transform="scale(0.02)"/>
-</pattern>
-<image id="image0_12_2840" width="50" height="50" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADkUlEQVR4nO2YXYhVVRTHd59OkD0oWShEkBISWg9ZREEvKYVgiJoQPkg9WBGEFfQkFPQFFeWDRPhQ+SQDoRgpojY5Z61z59rcs9YdL5kDefHOWevMNH1oBjZjzol97r7jHdNRnHOPHDg/OHDufVj7/Pde67/X3sYUFBQUFBQUFBQA6wFkZb/SWJjr2UDW2D5A+rsXyHKTdyGYPPIvkrxl8gi2RJC8DSQTzdWRr3vq9S6TRyHJO0UrgeW0S7XA65d7TB6FWPzq8BIk+cWl2q9+oE+aPAqx+LXGHOdmMZL+47G8aPIoxNLdHd8ErB9OuhrrF/398S3metLTE9/sU/QIsL6OpNuB5FtgOQKs4eWEtEAOX7Cr4kzgULkczs324+v1LiDdgKz7geTvqTZ70UPaO10sqISPIYs6dzth66jjAsq1kbuB9VO7wbVZ61/A8gOQfAwcru/l6FGohveXBobvulqb9amxAFjKLt4ZYF3TEQE2f7EqrwHLKWefYzaFfIrW1Wq1W9MYY+/g4Cxk+dKl2YStoTiObzRpUQqGFgHJgLPMc8CyDTmaZzoEsr6RdAHNFd8Nx0ZnzzwoRSuR9U83S4dLFV1sMgBIViDpHy7V+mYUzA/keSA5n7QWJJ9YdzIZAWkJgUCeTdIoERJtNBmCaaUWUPgQkp51BfeyydTSZUer2JHknTiOb7i2YLWR25H0Z+dMH5iM8NO2XyT53C2pf6Wa8P3GbR7LEx7Jq7aGkOQbJO23TSGQDNsct6mJpF6mG6IXDD3YPPzoWTg6ct80afeenT1gGZ92R297Mm1RwHWkdiOa8v+x0dlAuhlJj/+//ZATwLoLSD4C1pe8qj7jkzxeGhhaWqLo3ssJsasNpFvbjsJbU3FFDHRZ62zd1/fbHclg9XoXsm5p7SNNkXZnl6+wqmuhcnL+FeNeQoiddSA92Grj7arMWMDkgKQ7XeD37W974AHWwTYBZduO2DYixYOV2vpITYSbobFk36icnI+sb9p3J+AnPwifutbY7UJ8ktXWkS5MTGNBaiKaA+gmV2z7gPSzSR9neXemh51MLx+Q5Ts3WHPJrWtVw1WduA6yhy/TCbqTI2fzZsMt+bjP+nTuLuigog9PmbVAX0kzPrJ8D6SVjl+ZYtKgTebxXpNXoK1J8yh6wOQVYEVX4HtMnkHXrHkUPWfyDLjGrzfQO02eQZYf7WXa9f6OgoKCAnMp/gPeiVnY/jGzdwAAAABJRU5ErkJggg=="/>
-</defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#c5d0e6" class="bi bi-share" viewBox="0 0 16 16">
+  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
 </svg>

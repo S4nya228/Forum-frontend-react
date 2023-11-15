@@ -143,6 +143,7 @@ const PostCard = () => {
 							<div className="link-post__share">
 								<button type="button" onClick={stopPropagation}>
 									<img src="/image/sharePost.svg" alt="icon share post" />
+									&nbsp;
 									<span>Share</span>
 								</button>
 							</div>
@@ -166,12 +167,30 @@ const PostCard = () => {
 										style={getDropdownStyles()}
 									>
 										<li className="link-post__list-item-save">
-											<img src="/image/savePost.svg" alt="icon save post" />
+											<img src="/image/savePost.svg" alt="icon for save post" />{' '}
 											<span>Save</span>
 										</li>
-										<li className="link-post__list-item">Mute group</li>
-										<li className="link-post__list-item">Hide</li>
-										<li className="link-post__list-item">Report</li>
+										<li className="link-post__list-item">
+											<img
+												src="/image/mute_group.svg"
+												alt="icon for mute group"
+											/>{' '}
+											<span>Mute group</span>
+										</li>
+										<li className="link-post__list-item">
+											<img
+												src="/image/hide_post.svg"
+												alt="icon for hide post"
+											/>{' '}
+											<span>Hide</span>
+										</li>
+										<li className="link-post__list-item">
+											<img
+												src="/image/report_post.svg"
+												alt="icon for report post"
+											/>{' '}
+											<span>Report</span>
+										</li>
 									</ul>
 								)}
 							</div>

@@ -269,8 +269,9 @@
 
 	&__list-item {
 		display: flex;
-		color: #fff;
-		gap: 5px;
+		align-items: center;
+		color: #c5d0e6;
+		gap: 2px;
 		padding: 8px 7px;
 		border-radius: 0.375rem;
 		cursor: pointer;
@@ -282,8 +283,8 @@
 
 	&__list-item-save {
 		display: none;
-		color: #fff;
-		gap: 5px;
+		color: #c5d0e6;
+		gap: 2px;
 		padding: 8px 7px;
 		border-radius: 0.375rem;
 		cursor: pointer;
