@@ -13,7 +13,9 @@ const Trends = () => {
 						</div>
 						<div className="trends__info-box">
 							<div className="trends__title">
-								<span>Newests</span>&nbsp;<span>and Recent</span>
+								<span>Newests</span>&nbsp;
+								<span>and</span>&nbsp;
+								<span>Recent</span>
 							</div>
 							<div className="trends__description">
 								<span>Find the latest update</span>

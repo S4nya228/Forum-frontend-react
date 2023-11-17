@@ -1,42 +1,42 @@
-import React, { useState } from "react";
-import { validateUsername, validateEmail } from "../Validation/ValidationAuth";
-import { Link, useNavigate } from "react-router-dom";
-import "../ForgotPassword/ForgotPassword.scss";
+import React, { useState } from 'react'
+import { validateUsername, validateEmail } from '../Validation/ValidationAuth'
+import { Link, useNavigate } from 'react-router-dom'
+import '../ForgotPassword/ForgotPassword.scss'
 
 const ForgotPassword = () => {
 	const [forgotPasswordForm, setforgotPasswordForm] = useState({
-		username: "",
-		email: "",
-	});
+		username: '',
+		email: '',
+	})
 
-	const [error, setError] = useState(null);
+	const [error, setError] = useState(null)
 
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	const handleBack = () => {
-		navigate("/login");
-	};
+		navigate('/login')
+	}
 
 	const handleSubmit = () => {
-		const errors = {};
-		const usernameError = validateUsername(forgotPasswordForm.username);
+		const errors = {}
+		const usernameError = validateUsername(forgotPasswordForm.username)
 		if (usernameError) {
-			errors.username = usernameError;
+			errors.username = usernameError
 		}
-		const emailError = validateEmail(forgotPasswordForm.email);
+		const emailError = validateEmail(forgotPasswordForm.email)
 		if (emailError) {
-			errors.email = emailError;
+			errors.email = emailError
 		}
 
 		if (usernameError || emailError) {
 			setError({
 				username: usernameError,
 				email: emailError,
-			});
+			})
 		} else {
-			setError(null);
+			setError(null)
 		}
-	};
+	}
 
 	return (
 		<div className="forgot-password-window">
@@ -45,17 +45,7 @@ const ForgotPassword = () => {
 					className="forgot-password-window__button-back"
 					onClick={handleBack}
 				>
-					<svg
-						rpl=""
-						fill="#fff"
-						height="40"
-						icon-name="back-outline"
-						viewBox="0 0 20 20"
-						width="20"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path d="M19 9.375H2.51l7.932-7.933-.884-.884-9 9a.625.625 0 0 0 0 .884l9 9 .884-.884-7.933-7.933H19v-1.25Z"></path>
-					</svg>
+					<img src="/image/icon_button-back.svg" alt="button back" />
 				</button>
 				<div className="forgot-password-window__name">Reset your password</div>
 				<div className="forgot-password-window__description">
@@ -69,7 +59,7 @@ const ForgotPassword = () => {
 					<div className="forgot-password-window__username">
 						<div
 							className={`forgot-password-window__input-container ${
-								error && error.username ? "invalid-container" : ""
+								error && error.username ? 'invalid-container' : ''
 							}`}
 						>
 							<input
@@ -95,7 +85,7 @@ const ForgotPassword = () => {
 					<div className="forgot-password-window__email">
 						<div
 							className={`forgot-password-window__input-container ${
-								error && error.email ? "invalid-container" : ""
+								error && error.email ? 'invalid-container' : ''
 							}`}
 						>
 							<input
@@ -132,7 +122,7 @@ const ForgotPassword = () => {
 				</button>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default ForgotPassword;
+export default ForgotPassword

@@ -18,7 +18,9 @@ const CreatePost = () => {
 					/>
 				</div>
 				<div className="create-post__button">
-					<button type="button">Create Post</button>
+					<Link to="/create" className="create-post__button-link">
+						Create Post
+					</Link>
 				</div>
 			</div>
 		</div>

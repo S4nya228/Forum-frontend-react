@@ -7,6 +7,8 @@ import CreatePost from './CreatePost/CreatePost'
 import PostCard from './PostCard/PostCard'
 import Aside from './Aside/Aside'
 
+import '../../components/HomePage/HomePage.scss'
+
 const HomePage = () => {
 	return (
 		<div className="home-page">

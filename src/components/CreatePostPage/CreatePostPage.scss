@@ -1,0 +1,63 @@
+.create-post-page {
+	width: 100%;
+	margin-top: 80px;
+	padding: 0 0 20px 0;
+
+	&__container {
+		display: flex;
+		gap: 20px;
+		width: 100%;
+		max-width: 1540px;
+		margin: 0 auto;
+		padding-top: 30px;
+
+		@media (max-width: 1580px) {
+			width: 96%;
+		}
+
+		@media (max-width: 768px) {
+			width: 100%;
+			padding-top: 15px;
+			padding-bottom: 50px;
+		}
+	}
+
+	&__main {
+	}
+
+	&__title {
+		color: #fff;
+		font-size: 1.375rem;
+		font-weight: 600;
+	}
+
+	&__choose-group {
+	}
+
+	&__box {
+	}
+
+	&__option {
+	}
+
+	&__title-for-post {
+	}
+
+	&__description-for-post {
+	}
+
+	&__create-button {
+	}
+
+	&__aside {
+	}
+
+	&__aside-title {
+	}
+
+	&__list-information {
+	}
+
+	&__list-item {
+	}
+}

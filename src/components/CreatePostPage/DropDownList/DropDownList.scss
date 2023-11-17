@@ -1,0 +1,73 @@
+.react-select-container {
+	width: 300px;
+	border-radius: 6px 6px 0 0;
+	background-color: #262d34;
+	color: #fff;
+}
+.react-select {
+	&__control {
+		padding: 10px;
+	}
+
+	&__value-container {
+	}
+
+	&__indicators {
+		cursor: pointer;
+		svg {
+			fill: #ff6934;
+		}
+	}
+
+	&__menu {
+		background-color: #262d34;
+		border-radius: 0 0 6px 6px;
+		padding: 5px 10px 10px;
+
+		::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #97989d; /* Колір курсора */
+			border-radius: 4px; /* Закруглені кути курсора */
+		}
+	}
+
+	&__menu-list {
+		display: flex;
+		flex-direction: column;
+		padding: 0 20px 0 0;
+		gap: 10px;
+	}
+
+	&__group {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		img {
+			max-width: 30px;
+			max-height: 30px;
+		}
+	}
+
+	&__info-box {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__desc-group {
+		font-size: 12px;
+		color: #97989d;
+	}
+
+	&__option {
+		border-radius: 6px;
+		padding: 7px 5px;
+		&:hover {
+			cursor: pointer;
+			background-color: #2c353d;
+		}
+	}
+}
