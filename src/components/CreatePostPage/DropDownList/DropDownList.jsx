@@ -18,7 +18,7 @@ const options = [
 		),
 	},
 	{
-		value: 'Dota Two',
+		value: 'irl_me',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -30,7 +30,7 @@ const options = [
 		),
 	},
 	{
-		value: 'Counter Strike',
+		value: 'Minecraft',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -44,7 +44,7 @@ const options = [
 		),
 	},
 	{
-		value: 'irl_me',
+		value: 'Counter Strike 2',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -56,7 +56,7 @@ const options = [
 		),
 	},
 	{
-		value: 'item2',
+		value: 'Dota 2',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -68,7 +68,7 @@ const options = [
 		),
 	},
 	{
-		value: 'item2',
+		value: 'УжНУ',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -80,7 +80,7 @@ const options = [
 		),
 	},
 	{
-		value: 'item2',
+		value: 'Олексійко',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -92,7 +92,7 @@ const options = [
 		),
 	},
 	{
-		value: 'item2',
+		value: 'ROBLOX',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -104,7 +104,7 @@ const options = [
 		),
 	},
 	{
-		value: 'item2',
+		value: 'Animals',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />
@@ -116,7 +116,7 @@ const options = [
 		),
 	},
 	{
-		value: 'item2',
+		value: 'Stone',
 		label: (
 			<div className="react-select__group">
 				<img src="/image/icon-group.svg" alt="Item 2" />

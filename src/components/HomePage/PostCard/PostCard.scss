@@ -4,7 +4,7 @@
 	cursor: pointer;
 	background: #262d34;
 	border-radius: 1rem;
-	transition: box-shadow 0s linear;
+	transition: box-shadow 0.1s linear;
 
 	&:hover {
 		box-shadow: 0 0 0 0.5px white;

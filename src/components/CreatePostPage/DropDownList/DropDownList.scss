@@ -1,15 +1,20 @@
 .react-select-container {
-	width: 300px;
-	border-radius: 6px 6px 0 0;
+	width: 400px;
+	border-radius: 3px;
 	background-color: #262d34;
 	color: #fff;
 }
 .react-select {
 	&__control {
-		padding: 10px;
+		padding: 15px;
 	}
 
 	&__value-container {
+	}
+
+	&__placeholder {
+		font-size: 16px;
+		font-weight: 500;
 	}
 
 	&__indicators {
@@ -54,11 +59,12 @@
 
 	&__info-box {
 		display: flex;
+		font-size: 17px;
 		flex-direction: column;
 	}
 
 	&__desc-group {
-		font-size: 12px;
+		font-size: 13px;
 		color: #97989d;
 	}
 
