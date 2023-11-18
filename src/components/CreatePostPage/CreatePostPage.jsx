@@ -1,10 +1,11 @@
 import React from 'react'
 import '../../components/CreatePostPage/CreatePostPage.scss'
-import './DropDownList/DropDownList'
 import DropDownList from './DropDownList/DropDownList'
 import useMaxLenght from '../../hooks/useMaxLenght'
 import usePhotoUpload from '../../hooks/usePhotoUpload'
 import usePostModeSwitch from '../../hooks/usePostModeSwitch'
+import { useDrop } from 'react-dnd'
+import { NativeTypes } from 'react-dnd-html5-backend'
 
 const CreatePostPage = () => {
 	const {
@@ -25,6 +26,35 @@ const CreatePostPage = () => {
 		const computedHeight = field.scrollHeight + 2
 		field.style.height = `${computedHeight}px`
 	}
+
+	const [{ canDrop, isOver }, drop] = useDrop({
+		accept: NativeTypes.FILE,
+		drop: (item, monitor) => {
+			if (monitor) {
+				const files = monitor.getItem().files
+				if (files && files.length > 0) {
+					const acceptedFiles = files.filter(
+						(file) =>
+							file.type === 'image/png' ||
+							file.type === 'image/jpg' ||
+							file.type === 'image/gif' ||
+							file.type === 'image/jpeg' ||
+							file.type === 'image/webp'
+					)
+					if (acceptedFiles.length > 0) {
+						handleFileChange({ target: { files: acceptedFiles } })
+					}
+				}
+			}
+		},
+		collect: (monitor) => ({
+			isOver: monitor.isOver(),
+			canDrop: monitor.canDrop(),
+		}),
+	})
+
+	const isActive = canDrop && isOver
+
 	return (
 		<div className="create-post-page">
 			<div className="create-post-page__container">
@@ -80,11 +110,19 @@ const CreatePostPage = () => {
 						)}
 						{postMode === 'image' && (
 							<div className="create-post-page__image-for-post">
-								<div className="create-post-page__area-for-image">
+								<div
+									className={`create-post-page__area-for-image ${
+										isActive ? 'active' : ''
+									}`}
+									ref={drop}
+								>
 									{!selectedFile && (
 										<label className="create-post-page__input-label">
+											{/* Змініть текст відповідно */}
 											<span className="create-post-page__input-text">
-												Drag and drop image or
+												{isActive
+													? 'Drop the image here'
+													: 'Drag and drop image or'}
 											</span>
 											<input
 												type="file"
