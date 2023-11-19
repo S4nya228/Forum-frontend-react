@@ -10,7 +10,9 @@ const Header = () => {
 			<div className="header__container">
 				<div className="header__logo">
 					<div className="header__logo-img">
-						<img src="/image/logo.jpg" alt="logo" />
+						<Link to="/">
+							<img src="/image/logo.jpg" alt="logo" />
+						</Link>
 					</div>
 					<div className="header__logo-name">Connectopium</div>
 				</div>
