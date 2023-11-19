@@ -17,8 +17,8 @@ function App() {
 					<Route path="/" element={<HomePage />} index />
 					<Route path="/login" element={<LoginComponent />} />
 					<Route path="/register" element={<RegistrationComponent />} />
-					<Route path="/forgot_password" element={<ForgotPassword />} />
-					<Route path="/create" element={<CreatePostPage />} />
+					<Route path="/forgot-password" element={<ForgotPassword />} />
+					<Route path="/create-post" element={<CreatePostPage />} />
 				</Routes>
 				<Menu />
 			</div>

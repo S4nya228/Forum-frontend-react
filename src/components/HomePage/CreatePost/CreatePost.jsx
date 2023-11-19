@@ -12,13 +12,16 @@ const CreatePost = () => {
 					</Link>
 				</div>
 				<div className="create-post__input-data">
-					<input
-						type="text"
-						placeholder="Let’s share what going on your mind..."
-					/>
+					<Link to="/create-post">
+						<input
+							type="text"
+							readOnly
+							placeholder="Let’s share what going on your mind..."
+						/>
+					</Link>
 				</div>
 				<div className="create-post__button">
-					<Link to="/create" className="create-post__button-link">
+					<Link to="/create-post" className="create-post__button-link">
 						Create Post
 					</Link>
 				</div>

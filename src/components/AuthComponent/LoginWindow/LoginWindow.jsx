@@ -106,7 +106,7 @@ const LoginComponent = () => {
 				</div>
 				<div className="login-window__remember-password">
 					<span>
-						Forgot your <Link to="/forgot_password">password</Link>?
+						Forgot your <Link to="/forgot-password">password</Link>?
 					</span>
 				</div>
 				<button
