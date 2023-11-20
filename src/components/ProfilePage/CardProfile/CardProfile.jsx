@@ -14,6 +14,9 @@ const CardProfile = () => {
 						<img src="/image/avatar.svg" alt="avatar user" />
 					</div>
 				</div>
+				<div className="card-profile__settings">
+					<img src="/image/settings.svg" alt="icon for settings" />
+				</div>
 				<div className="card-profile__information-box">
 					<div className="card-profile__nickname">
 						<span>Sanya_228</span>
