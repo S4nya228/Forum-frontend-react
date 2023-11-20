@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CreateGroup from '../../CreateGroup/CreateGroup'
 
 import '../CardProfile/CardProfile.scss'
+import { Link } from 'react-router-dom'
 
 const CardProfile = () => {
+	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
+
+	const handleCreateGroupClick = () => {
+		setCreateGroupVisible(true)
+		document.body.style.overflow = 'hidden'
+	}
+
+	const handleCloseCreateGroup = () => {
+		setCreateGroupVisible(false)
+		document.body.style.overflow = 'auto'
+	}
+
 	return (
 		<div className="card-profile">
 			<div className="card-profile__container">
@@ -42,13 +56,19 @@ const CardProfile = () => {
 					</div>
 				</div>
 				<div className="card-profile__button-actions">
-					<div className="card-profile__create-group">
-						<button>Create group</button>
+					<div
+						className="card-profile__create-group"
+						onClick={handleCreateGroupClick}
+					>
+						<button onClick={handleCreateGroupClick}>Create group</button>
 					</div>
-					<div className="card-profile__create-post">
+					<Link to="/create-post" className="card-profile__create-post">
 						<button>Create post</button>
-					</div>
+					</Link>
 				</div>
+				{isCreateGroupVisible && (
+					<CreateGroup onClose={handleCloseCreateGroup} />
+				)}
 			</div>
 		</div>
 	)
