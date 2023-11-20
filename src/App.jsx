@@ -7,6 +7,7 @@ import RegistrationComponent from './components/AuthComponent/RegistrationWindow
 import ForgotPassword from './components/AuthComponent/ForgotPassword/ForgotPassword'
 import Menu from './components/MobileMenu/Menu'
 import CreatePostPage from './components/CreatePostPage/CreatePostPage'
+import ProfilePage from './components/ProfilePage/ProfilePage'
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/register" element={<RegistrationComponent />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
 					<Route path="/create-post" element={<CreatePostPage />} />
+					<Route path="/profile" element={<ProfilePage />} />
 				</Routes>
 				<Menu />
 			</div>
