@@ -64,15 +64,12 @@ const RegistrationComponent = () => {
 
 	const registerUser = async () => {
 		try {
-			const response = await axiosInstance.post(
-				'http://ec2-51-20-87-96.eu-north-1.compute.amazonaws.com/api/v1/register',
-				{
-					email: registerForm.email,
-					name: registerForm.name,
-					password: registerForm.password,
-					password_confirmation: registerForm.confirmPassword,
-				}
-			)
+			const response = await axiosInstance.post('/register', {
+				email: registerForm.email,
+				name: registerForm.name,
+				password: registerForm.password,
+				password_confirmation: registerForm.confirmPassword,
+			})
 
 			console.log(response.data)
 			navigate('/')

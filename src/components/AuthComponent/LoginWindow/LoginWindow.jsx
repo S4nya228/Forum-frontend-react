@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import GoogleButton from '../GoggleButton/GoggleButton'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-	validateUsername,
-	validatePassword,
-} from '../Validation/ValidationAuth'
+import axiosInstance from '../../../api/axiosInstance'
+import { validatePassword, validateEmail } from '../Validation/ValidationAuth'
 import '../LoginWindow/LoginWindow.scss'
 
 const LoginComponent = () => {
@@ -13,15 +11,15 @@ const LoginComponent = () => {
 	const handleBack = () => {
 		navigate('/')
 	}
-	const [loginForm, setLoginForm] = useState({ username: '', password: '' })
+	const [loginForm, setLoginForm] = useState({ email: '', password: '' })
 	const [error, setError] = useState(null)
 
-	const handleLogin = () => {
+	const handleLogin = async () => {
 		const errors = {}
 
-		const usernameError = validateUsername(loginForm.username)
-		if (usernameError) {
-			errors.username = usernameError
+		const emailError = validateEmail(loginForm.email)
+		if (emailError) {
+			errors.email = emailError
 		}
 
 		const passwordError = validatePassword(loginForm.password)
@@ -31,6 +29,19 @@ const LoginComponent = () => {
 
 		if (Object.keys(errors).length === 0) {
 			setError(null)
+			try {
+				const response = await axiosInstance.post('/login', {
+					email: loginForm.email,
+					password: loginForm.password,
+				})
+
+				console.log(response.data)
+				// Виконайте дії після успішного входу, наприклад, перехід на іншу сторінку
+				navigate('/')
+			} catch (error) {
+				console.error('Login failed:', error.response.data)
+				// Обробте помилки входу, наприклад, виведіть повідомлення про помилку
+			}
 		} else {
 			setError(errors)
 		}
@@ -53,27 +64,27 @@ const LoginComponent = () => {
 				<GoogleButton />
 				<div className="login-window__separation">OR</div>
 				<div className="login-window__inputs">
-					<div className="login-window__username">
+					<div className="login-window__email">
 						<div
 							className={`login-window__input-container ${
-								error && error.username ? 'invalid-container' : ''
+								error && error.email ? 'invalid-container' : ''
 							}`}
 						>
 							<input
 								autoComplete="off"
 								type="text"
-								name="username"
-								id="username-label"
-								value={loginForm.username}
+								name="email"
+								id="email-label"
+								value={loginForm.email}
 								onChange={(e) =>
-									setLoginForm({ ...loginForm, username: e.target.value })
+									setLoginForm({ ...loginForm, email: e.target.value })
 								}
 								required
 							/>
-							<label htmlFor="username-label">Username</label>
+							<label htmlFor="email-label">Email</label>
 						</div>
-						{error && error.username && (
-							<div className="error-message">{error.username}</div>
+						{error && error.email && (
+							<div className="error-message">{error.email}</div>
 						)}
 					</div>
 					<div className="login-window__password">
