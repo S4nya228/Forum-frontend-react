@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import store from './store/store'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	<React.StrictMode>
-		<DndProvider backend={HTML5Backend}>
-			<GoogleOAuthProvider clientId="859615875722-go403383fvc0f57dqhtj9b95rfu4u8ve.apps.googleusercontent.com">
-				<App />
-			</GoogleOAuthProvider>
-		</DndProvider>
+		<Provider store={store}>
+			<DndProvider backend={HTML5Backend}>
+				<GoogleOAuthProvider clientId="859615875722-go403383fvc0f57dqhtj9b95rfu4u8ve.apps.googleusercontent.com">
+					<App />
+				</GoogleOAuthProvider>
+			</DndProvider>
+		</Provider>
 	</React.StrictMode>
 )
 

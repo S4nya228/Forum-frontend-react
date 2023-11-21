@@ -98,6 +98,23 @@
 		}
 	}
 
+	&__auth-user {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		gap: 7px;
+
+		img {
+			max-width: 40px;
+			max-height: 40px;
+		}
+
+		span {
+			color: #fff;
+			font-size: 18px;
+		}
+	}
+
 	@media (max-width: 768px) {
 		&__container {
 			gap: 5px;

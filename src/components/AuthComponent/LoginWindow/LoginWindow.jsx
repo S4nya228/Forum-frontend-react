@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../store/authSlise'
 import GoogleButton from '../GoggleButton/GoggleButton'
 import { Link, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../../api/axiosInstance'
@@ -7,6 +9,7 @@ import '../LoginWindow/LoginWindow.scss'
 
 const LoginComponent = () => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const handleBack = () => {
 		navigate('/')
@@ -35,12 +38,11 @@ const LoginComponent = () => {
 					password: loginForm.password,
 				})
 
-				console.log(response.data)
-				// Виконайте дії після успішного входу, наприклад, перехід на іншу сторінку
+				const { token } = response.data
+				dispatch(setToken(token))
 				navigate('/')
 			} catch (error) {
 				console.error('Login failed:', error.response.data)
-				// Обробте помилки входу, наприклад, виведіть повідомлення про помилку
 			}
 		} else {
 			setError(errors)

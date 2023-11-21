@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { useSelector } from 'react-redux'
 import '../Header/Header.scss'
 import '../AuthComponent/LoginWindow/LoginWindow.scss'
 
 const Header = () => {
+	const token = useSelector((state) => state.auth.token)
 	return (
 		<header className="header">
 			<div className="header__container">
@@ -39,9 +40,16 @@ const Header = () => {
 					</svg>
 				</div>
 				<div className="header__login">
-					<Link to="login" className="header__login-link">
-						Log In
-					</Link>
+					{token ? (
+						<Link to="login" className="header__login-link">
+							Log In
+						</Link>
+					) : (
+						<Link to="/profile" className="header__auth-user">
+							<img src="/image/avatar.svg" alt="avatar user" />
+							<span>Sanya228</span>
+						</Link>
+					)}
 				</div>
 			</div>
 		</header>
