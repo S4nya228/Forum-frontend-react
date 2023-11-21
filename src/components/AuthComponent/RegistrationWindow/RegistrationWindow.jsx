@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import GoogleButton from '../GoggleButton/GoggleButton'
+import axiosInstance from '../../../api/axiosInstance'
 import {
 	validateEmail,
 	validateName,
@@ -52,13 +53,31 @@ const RegistrationComponent = () => {
 		if (Object.keys(errors).length === 0) {
 			setError(null)
 			if (registrationStep === 1) {
-				// Якщо це перший крок, змінюємо на другий
 				setRegistrationStep(2)
 			} else {
-				// Робіть реєстрацію або іншу логіку для другого кроку
+				registerUser()
 			}
 		} else {
 			setError(errors)
+		}
+	}
+
+	const registerUser = async () => {
+		try {
+			const response = await axiosInstance.post(
+				'http://ec2-51-20-87-96.eu-north-1.compute.amazonaws.com/api/v1/register',
+				{
+					email: registerForm.email,
+					name: registerForm.name,
+					password: registerForm.password,
+					password_confirmation: registerForm.confirmPassword,
+				}
+			)
+
+			console.log(response.data)
+			navigate('/')
+		} catch (error) {
+			console.error('Registration failed:', error.response.data)
 		}
 	}
 

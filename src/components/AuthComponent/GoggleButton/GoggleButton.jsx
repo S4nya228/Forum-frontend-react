@@ -1,11 +1,11 @@
-import React from "react";
-import { useGoogleLogin } from "@react-oauth/google";
-import "../GoggleButton/GoggleButton.scss";
+import React from 'react'
+import { useGoogleLogin } from '@react-oauth/google'
+import '../GoggleButton/GoggleButton.scss'
 
 const GoogleButton = () => {
 	const login = useGoogleLogin({
 		onSuccess: (tokenResponse) => console.log(tokenResponse),
-	});
+	})
 
 	return (
 		<div className="button-google">
@@ -37,7 +37,7 @@ const GoogleButton = () => {
 				Sign in with Google
 			</button>
 		</div>
-	);
-};
+	)
+}
 
-export default GoogleButton;
+export default GoogleButton
