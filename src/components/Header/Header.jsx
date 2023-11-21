@@ -41,13 +41,13 @@ const Header = () => {
 				</div>
 				<div className="header__login">
 					{token ? (
-						<Link to="login" className="header__login-link">
-							Log In
-						</Link>
-					) : (
 						<Link to="/profile" className="header__auth-user">
 							<img src="/image/Avatar.svg" alt="avatar user" />
 							<span>Sanya228</span>
+						</Link>
+					) : (
+						<Link to="login" className="header__login-link">
+							Log In
 						</Link>
 					)}
 				</div>

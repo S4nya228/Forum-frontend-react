@@ -33,7 +33,7 @@ const CardProfile = () => {
 						<img src="/image/banner.jpg" alt="banner for profile" />
 					</div>
 					<div className="card-profile__avatar">
-						<img src="/image/avatar.svg" alt="avatar user" />
+						<img src="/image/Avatar.svg" alt="avatar user" />
 					</div>
 				</div>
 				<div className="card-profile__settings">
