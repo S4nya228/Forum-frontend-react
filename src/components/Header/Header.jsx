@@ -46,7 +46,7 @@ const Header = () => {
 						</Link>
 					) : (
 						<Link to="/profile" className="header__auth-user">
-							<img src="/image/avatar.svg" alt="avatar user" />
+							<img src="/image/Avatar.svg" alt="avatar user" />
 							<span>Sanya228</span>
 						</Link>
 					)}

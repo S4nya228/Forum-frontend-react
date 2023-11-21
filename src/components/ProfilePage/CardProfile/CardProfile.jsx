@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 import CreateGroup from '../../CreateGroup/CreateGroup'
-
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../store/actions'
 import '../CardProfile/CardProfile.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const CardProfile = () => {
 	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
+	const handleLogout = () => {
+		dispatch(logout())
+		navigate('/')
+	}
 
 	const handleCreateGroupClick = () => {
 		setCreateGroupVisible(true)
@@ -69,6 +77,15 @@ const CardProfile = () => {
 				{isCreateGroupVisible && (
 					<CreateGroup onClose={handleCloseCreateGroup} />
 				)}
+				<div className="card-profile__logout">
+					<button
+						className="card-profile__logout-button"
+						onClick={handleLogout}
+					>
+						<img src="/image/logout.svg" alt="icon for logout" />
+						<span>Log out</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	)

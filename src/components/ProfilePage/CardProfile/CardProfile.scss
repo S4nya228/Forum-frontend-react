@@ -151,4 +151,27 @@
 			width: 80%;
 		}
 	}
+
+	&__logout {
+		display: flex;
+		justify-content: flex-end;
+		padding: 12px;
+	}
+
+	&__logout-button {
+		display: flex;
+		align-items: center;
+		background-color: #ff6934;
+		gap: 6px;
+		border-radius: 6px;
+		padding: 6px;
+		span {
+			color: #fff;
+		}
+
+		&:hover {
+			background-color: #fb8332;
+			box-shadow: rgba(0, 0, 0, 0.1) 0 0.25rem 0.75rem;
+		}
+	}
 }
