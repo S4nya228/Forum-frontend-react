@@ -1,18 +1,29 @@
 import React, { useState } from 'react'
 import CreateGroup from '../../CreateGroup/CreateGroup'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../../store/actions'
 import '../CardProfile/CardProfile.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import axiosInstance from '../../../api/axiosInstance'
 
 const CardProfile = () => {
 	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+	const token = useSelector((state) => state.auth.token)
 
-	const handleLogout = () => {
-		dispatch(logout())
-		navigate('/')
+	const handleLogout = async () => {
+		try {
+			if (!token) {
+				console.error('Token is missing or empty.')
+				return
+			}
+
+			const headers = { Authorization: `Bearer ${token}` }
+			await axiosInstance.post('/logout', null, { headers })
+
+			// Додаткова логіка після логауту
+			// ...
+		} catch (error) {
+			console.error('Logout failed:', error)
+		}
 	}
 
 	const handleCreateGroupClick = () => {
