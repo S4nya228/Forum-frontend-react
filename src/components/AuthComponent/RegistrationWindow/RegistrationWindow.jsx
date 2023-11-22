@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import GoogleButton from '../GoggleButton/GoggleButton'
 import axiosInstance from '../../../api/axiosInstance'
+import { setToken } from '../../../store/authSlise'
 import {
 	validateEmail,
 	validateName,
 	validatePasswordComplexity,
 } from '../Validation/ValidationAuth'
 import '../RegistrationWindow/RegistrationWindow.scss'
+import { useDispatch } from 'react-redux'
 
 const RegistrationComponent = () => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const handleBack = () => {
 		navigate('/')
@@ -72,6 +75,7 @@ const RegistrationComponent = () => {
 			})
 
 			console.log(response.data)
+			dispatch(setToken())
 			navigate('/')
 		} catch (error) {
 			console.error('Registration failed:', error.response.data)
