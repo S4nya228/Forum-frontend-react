@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import CreateGroup from '../../CreateGroup/CreateGroup'
 import '../CardProfile/CardProfile.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axiosInstance from '../../../api/axiosInstance'
+import { clearToken } from '../../../store/authSlise'
 
 const CardProfile = () => {
 	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
 	const token = useSelector((state) => state.auth.token)
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const handleLogout = async () => {
 		try {
@@ -19,6 +21,8 @@ const CardProfile = () => {
 
 			const headers = { Authorization: `Bearer ${token}` }
 			await axiosInstance.post('/logout', null, { headers })
+
+			dispatch(clearToken())
 
 			navigate('/')
 		} catch (error) {
