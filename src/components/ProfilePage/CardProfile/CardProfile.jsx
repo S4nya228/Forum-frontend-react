@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosInstance from '../../../api/axiosInstance'
 import { clearToken } from '../../../store/authSlise'
+import { clearUser } from '../../../store/userSlise'
 
 const CardProfile = () => {
 	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
@@ -23,6 +24,7 @@ const CardProfile = () => {
 			await axiosInstance.post('/logout', null, { headers })
 
 			dispatch(clearToken())
+			dispatch(clearUser())
 
 			navigate('/')
 		} catch (error) {

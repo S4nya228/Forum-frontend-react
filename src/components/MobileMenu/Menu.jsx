@@ -8,7 +8,7 @@ const Menu = () => {
 		<div className="menu">
 			<div className="menu__container">
 				<div className="menu__actions-list">
-					<Link className="menu__action">
+					<Link to="/" className="menu__action">
 						<img src="/image/mob_icon_home.svg" alt="icon home" />
 					</Link>
 					<Link className="menu__action">
@@ -20,7 +20,7 @@ const Menu = () => {
 					<Link className="menu__action">
 						<img src="/image/mob_icon_bell.svg" alt="icon group" />
 					</Link>
-					<Link className="menu__action">
+					<Link to="/profile" className="menu__action">
 						<img src="/image/mob_icon_account.svg" alt="" />
 					</Link>
 				</div>

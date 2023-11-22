@@ -1,11 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setUser } from '../../store/userSlise'
 import '../Header/Header.scss'
 import '../AuthComponent/LoginWindow/LoginWindow.scss'
+import axiosInstance from '../../api/axiosInstance'
 
 const Header = () => {
 	const token = useSelector((state) => state.auth.token)
+	const user = useSelector((state) => state.user.user)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		const fetchUserData = async () => {
+			try {
+				const response = await axiosInstance.get('/user', {
+					headers: {
+						Authorization: `Bearer ${token}`,
+						'Content-Type': 'application/json',
+					},
+				})
+
+				dispatch(setUser(response.data))
+			} catch (error) {
+				console.error('Error fetching user data:', error)
+			}
+		}
+
+		if (token && (!user || user.name === null)) {
+			fetchUserData()
+		}
+	}, [token, user, dispatch])
+
 	return (
 		<header className="header">
 			<div className="header__container">
@@ -43,7 +69,7 @@ const Header = () => {
 					{token ? (
 						<Link to="/profile" className="header__auth-user">
 							<img src="/image/Avatar.svg" alt="avatar user" />
-							<span>Sanya228</span>
+							<span>{user ? user.name : ''}</span>
 						</Link>
 					) : (
 						<Link to="login" className="header__login-link">
