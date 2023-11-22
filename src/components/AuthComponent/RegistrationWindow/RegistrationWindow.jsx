@@ -74,8 +74,9 @@ const RegistrationComponent = () => {
 				password_confirmation: registerForm.confirmPassword,
 			})
 
+			dispatch(setToken(response.data.token))
 			console.log(response.data)
-			dispatch(setToken())
+
 			navigate('/')
 		} catch (error) {
 			console.error('Registration failed:', error.response.data)
