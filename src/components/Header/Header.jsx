@@ -68,7 +68,11 @@ const Header = () => {
 				<div className="header__login">
 					{token ? (
 						<Link to="/profile" className="header__auth-user">
-							<img src="/image/Avatar.svg" alt="avatar user" />
+							{user && user.avatar ? (
+								<img src={user.avatar} alt="avatar user" />
+							) : (
+								<img src="/image/Avatar.svg" alt="default avatar" />
+							)}
 							<span>{user ? user.name : ''}</span>
 						</Link>
 					) : (

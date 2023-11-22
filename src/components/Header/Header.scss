@@ -112,6 +112,10 @@
 		span {
 			color: #fff;
 			font-size: 18px;
+
+			@media (max-width: 425px) {
+				display: none;
+			}
 		}
 	}
 
