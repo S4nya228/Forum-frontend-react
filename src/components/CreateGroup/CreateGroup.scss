@@ -80,33 +80,137 @@
 	}
 
 	&__type {
+		padding: 8px;
+	}
+
+	&__radio-label {
 		display: flex;
+		align-items: center;
 		gap: 10px;
-
-		input[type='radio'] {
-			margin-right: 5px;
-			cursor: pointer;
-
-			&:checked {
-				border-color: #ff6934;
-				background-color: red;
-			}
-		}
+		cursor: pointer;
+		position: relative;
 	}
 
 	&__information {
-		span {
-			color: #97989d;
-			font-size: 13px;
-		}
+		padding-left: 25px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	&__type-name {
 		display: flex;
+		align-items: center;
 		gap: 5px;
-		p {
+	}
+
+	&__radio-label span {
+		font-size: 14px;
+		font-weight: 400;
+		color: #97989d;
+	}
+
+	&__type input[type='radio'] {
+		display: none;
+	}
+
+	&__radio-label::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		display: inline-block;
+		min-height: 13px;
+		min-width: 13px;
+		background-color: transparent;
+		border: 1px solid #97989d;
+		border-radius: 50%;
+	}
+
+	&__type input[type='radio']:checked + &__radio-label::before {
+		background-color: #ff6934;
+	}
+
+	&__radio-label::after {
+		content: '';
+		position: absolute;
+		display: none;
+		top: 50%;
+		left: 4px;
+		transform: translateY(-50%);
+	}
+
+	&__type input[type='radio']:checked + &__radio-label::after {
+		display: block;
+	}
+
+	&__radio-label::after {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background-color: white;
+	}
+
+	&__nsfw {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		span {
+			color: #fff;
+			font-size: 18px;
 			font-weight: 500;
 		}
+	}
+
+	&__nsfw-checkbox {
+		position: relative;
+		display: flex;
+		gap: 10px;
+	}
+
+	&__nsfw-checkbox p {
+		font-size: 14px;
+		font-weight: 400;
+		color: #97989d;
+	}
+
+	&__nsfw-checkbox input {
+		display: none;
+	}
+
+	&__checkmark {
+		position: relative;
+		cursor: pointer;
+		height: 20px;
+		width: 20px;
+		background-color: transparent;
+		border: 1px solid #97989d;
+		border-radius: 3px;
+	}
+
+	&__nsfw-checkbox input:checked + &__checkmark {
+		background-color: #ff6934;
+	}
+
+	&__checkmark:after {
+		content: '';
+		position: absolute;
+		display: none;
+	}
+
+	&__nsfw-checkbox input:checked + &__checkmark:after {
+		display: block;
+	}
+
+	&__checkmark:after {
+		left: 7px;
+		top: 3px;
+		width: 5px;
+		height: 10px;
+		border: solid white;
+		border-width: 0 3px 3px 0;
+		transform: rotate(45deg);
 	}
 
 	&__create-button {

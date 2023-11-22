@@ -29,42 +29,54 @@ const CreateGroup = ({ onClose }) => {
 					<span>Group type</span>
 					<div className="create-group__list-types">
 						<div className="create-group__type">
-							<input type="radio" name="radio" />
-							<div className="create-group__information">
-								<div className="create-group__type-name">
-									<img src="/image/public_icon.svg" alt="" />
-									<p>Public</p>
+							<input type="radio" name="groupType" id="public" />
+							<label htmlFor="public" className="create-group__radio-label">
+								<div className="create-group__information">
+									<div className="create-group__type-name">
+										<img src="/image/public_icon.svg" alt="" />
+										<p>Public</p>
+									</div>
+									<span>
+										Anyone can view, post, and comment to this community
+									</span>
 								</div>
-								<span>
-									Anyone can view, post, and comment to this community
-								</span>
-							</div>
+							</label>
 						</div>
 						<div className="create-group__type">
-							<input type="radio" name="radio" />
-							<div className="create-group__information">
-								<div className="create-group__type-name">
-									<img src="/image/restricted_icon.svg" alt="" />
-									<p>Restricted</p>
+							<input type="radio" name="groupType" id="restricted" />
+							<label htmlFor="restricted" className="create-group__radio-label">
+								<div className="create-group__information">
+									<div className="create-group__type-name">
+										<img src="/image/restricted_icon.svg" alt="" />
+										<p>Restricted</p>
+									</div>
+									<span>Only approved members can view and participate</span>
 								</div>
-								<span>
-									Anyone can view this community, but only approved users can
-									post
-								</span>
-							</div>
+							</label>
 						</div>
 						<div className="create-group__type">
-							<input type="radio" name="radio" />
-							<div className="create-group__information">
-								<div className="create-group__type-name">
-									<img src="/image/private_icon.svg" alt="" />
-									<p>Private</p>
+							<input type="radio" name="groupType" id="private" />
+							<label htmlFor="private" className="create-group__radio-label">
+								<div className="create-group__information">
+									<div className="create-group__type-name">
+										<img src="/image/private_icon.svg" alt="" />
+										<p>Private</p>
+									</div>
+									<span>Only approved members can view and participate</span>
 								</div>
-								<span>
-									Only approved users can view and submit to this community
-								</span>
-							</div>
+							</label>
 						</div>
+					</div>
+				</div>
+				<div className="create-group__nsfw">
+					<span>NSFW content</span>
+					<div className="create-group__nsfw-checkbox">
+						<input type="checkbox" id="nsfwCheckbox" />
+						<label
+							htmlFor="nsfwCheckbox"
+							className="create-group__checkmark"
+						></label>
+						<p>18+ year old community</p>
 					</div>
 				</div>
 				<div className="create-group__create-button">
