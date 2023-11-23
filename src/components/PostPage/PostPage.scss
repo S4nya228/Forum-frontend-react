@@ -22,7 +22,7 @@
 
 		@media (max-width: 768px) {
 			width: 100%;
-			padding-top: 15px;
+			padding-top: 0;
 			padding-bottom: 50px;
 		}
 	}
@@ -32,7 +32,16 @@
 		background-color: #262d34;
 		border-radius: 10px;
 		width: clamp(15.625rem, 60%, 55.125rem);
+
+		@media (max-width: 960px) {
+			width: 100%;
+		}
+
+		@media (max-width: 768px) {
+			border-radius: 0;
+		}
 	}
+
 	&__aside {
 		width: 350px;
 

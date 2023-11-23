@@ -114,13 +114,6 @@ const PostInformation = () => {
 							/>
 						</button>
 					</div>
-					<div className="post-info__comments">
-						<img src="/image/comentIcon.svg" alt="icon comments" />
-						<div className="post-info__count-comments">
-							<span>8</span>
-							<span>Comments</span>
-						</div>
-					</div>
 					<div className="post-info__share">
 						<button type="button">
 							<img src="/image/sharePost.svg" alt="icon share post" />
