@@ -27,6 +27,7 @@ const usePostCardHooks = () => {
 		handleBack,
 		stopPropagation,
 		handleButtonClickWithTwoEvents,
+		toggleList,
 	}
 }
 

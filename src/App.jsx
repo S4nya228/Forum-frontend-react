@@ -10,6 +10,7 @@ import CreatePostPage from './components/CreatePostPage/CreatePostPage'
 import ProfilePage from './components/ProfilePage/ProfilePage'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import PostPage from './components/PostPage/PostPage'
 
 const ProtectedRoute = ({ element, redirectTo, ...rest }) => {
 	const isAuthenticated = useSelector((state) => state.auth.token)
@@ -39,6 +40,7 @@ function App() {
 					<Route path="/login" element={<LoginComponent />} />
 					<Route path="/register" element={<RegistrationComponent />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
+					<Route path="/post" element={<PostPage />} />
 					<Route
 						path="/create-post"
 						element={

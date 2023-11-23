@@ -164,12 +164,11 @@
 		}
 
 		textarea {
-			color: #f4f6f8;
+			color: #b8c5c9;
 			resize: none;
 			background: transparent;
 			border: none;
 			cursor: pointer;
-
 			width: 100%;
 			min-height: 100px;
 			max-height: 341px;
@@ -179,9 +178,6 @@
 			white-space: pre-wrap;
 			text-align: justify;
 			overflow-y: hidden;
-		}
-
-		@media (max-width: 768px) {
 		}
 	}
 

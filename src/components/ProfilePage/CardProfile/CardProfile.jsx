@@ -21,6 +21,7 @@ const CardProfile = () => {
 			}
 
 			const headers = { Authorization: `Bearer ${token}` }
+
 			await Promise.all([
 				axiosInstance.post('/logout', null, { headers }),
 				navigate('/'),
