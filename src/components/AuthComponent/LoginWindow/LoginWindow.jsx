@@ -73,7 +73,6 @@ const LoginComponent = () => {
 							}`}
 						>
 							<input
-								autoComplete="off"
 								type="text"
 								name="email"
 								id="email-label"

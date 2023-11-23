@@ -135,7 +135,6 @@ const RegistrationComponent = () => {
 								}`}
 							>
 								<input
-									autoComplete="off"
 									type="text"
 									required
 									name="email"
