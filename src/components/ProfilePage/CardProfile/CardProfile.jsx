@@ -21,12 +21,13 @@ const CardProfile = () => {
 			}
 
 			const headers = { Authorization: `Bearer ${token}` }
-			await axiosInstance.post('/logout', null, { headers })
+			await Promise.all([
+				axiosInstance.post('/logout', null, { headers }),
+				navigate('/'),
+			])
 
 			dispatch(clearToken())
 			dispatch(clearUser())
-
-			navigate('/')
 		} catch (error) {
 			console.error('Logout failed:', error)
 		}

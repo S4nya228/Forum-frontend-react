@@ -19,7 +19,6 @@ const ProtectedRoute = ({ element, redirectTo, ...rest }) => {
 	) : (
 		<Navigate
 			to={redirectTo}
-			replace={true}
 			state={{ from: rest.location?.pathname || '/' }}
 		/>
 	)
