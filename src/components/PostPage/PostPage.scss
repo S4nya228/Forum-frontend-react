@@ -16,6 +16,10 @@
 			width: 96%;
 		}
 
+		@media (max-width: 960px) {
+			flex-direction: column-reverse;
+		}
+
 		@media (max-width: 768px) {
 			width: 100%;
 			padding-top: 15px;
