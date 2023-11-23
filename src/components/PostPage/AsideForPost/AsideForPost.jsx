@@ -1,5 +1,5 @@
 import React from 'react'
-import '../AsideForPost/AsideForPost.scss'
+import './AsideForPost.scss'
 import GroupCard from '../../GroupCard/GroupCard'
 
 const AsideForPost = () => {

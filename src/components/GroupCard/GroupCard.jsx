@@ -10,7 +10,7 @@ const GroupCard = () => {
 				</div>
 				<div className="card-group__title">
 					<div className="card-group__avatar">
-						<img src="/image/Avatar.svg" alt="avatar user" />
+						<img src="/image/icon-group.svg" alt="avatar user" />
 					</div>
 					<div className="card-group__name">
 						<span>Ukraine - its good</span>
@@ -23,6 +23,10 @@ const GroupCard = () => {
 							та дизайном. Завжди готовий до викликів та пошуку нового.
 						</span>
 					</div>
+					<div className="card-group__registration-date">
+						<img src="/image/reg_day.svg" alt="icon for reg date" />
+						<span>November 20, 2023</span>
+					</div>
 					<div className="card-group__more-info">
 						<div className="card-group__count-posts">
 							<img
@@ -32,15 +36,11 @@ const GroupCard = () => {
 							<span>314 posts</span>
 						</div>
 						<div className="card-group__count-followers">
-							<img src="/image/" alt="icon for followers" />
+							<img src="/image/public_icon.svg" alt="icon for followers" />
 							<span>1,154,326 members</span>
 						</div>
-						<div className="card-group__registration-date">
-							<img src="/image/reg_day.svg" alt="icon for reg date" />
-							<span>November 20, 2023</span>
-						</div>
 					</div>
-					<div className="card-group__joined">
+					<div className="card-group__join">
 						<button>Join</button>
 					</div>
 				</div>
