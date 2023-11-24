@@ -1,7 +1,21 @@
 import React from 'react'
 import '../GroupCard/GroupCard.scss'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const GroupCard = () => {
+	const token = useSelector((state) => state.auth.token)
+	const navigate = useNavigate()
+
+	const handleJoinGroup = () => {
+		if (token) {
+			console.log('вступив')
+		} else {
+			console.log('невступив:')
+			navigate('/login')
+		}
+	}
+
 	return (
 		<div className="card-group">
 			<div className="card-group__container">
@@ -41,7 +55,7 @@ const GroupCard = () => {
 						</div>
 					</div>
 					<div className="card-group__join">
-						<button>Join</button>
+						<button onClick={handleJoinGroup}>Join</button>
 					</div>
 				</div>
 			</div>

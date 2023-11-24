@@ -1,15 +1,59 @@
 import React from 'react'
-import { useGoogleLogin } from '@react-oauth/google'
 import '../GoggleButton/GoggleButton.scss'
+// import { useDispatch } from 'react-redux'
+// import { useNavigate } from 'react-router-dom'
+// import axiosInstance from '../../../api/axiosInstance'
+// import { setToken } from '../../../store/authSlise'
+
+import { useGoogleOAuth } from 'react-oauth/google'
+
+// const GoogleButton = () => {
+// 	// const dispatch = useDispatch()
+// 	// const navigate = useNavigate()
+
+// 	const handleGoogleLoginSuccess = async (tokenResponse) => {
+// 		try {
+// 			const response = await axiosInstance.get('/auth/google', {
+// 				headers: {
+// 					'Content-Type': 'application/json',
+// 				},
+// 				params: {
+// 					token: tokenResponse.tokenId,
+// 				},
+// 				withCredentials: true,
+// 			})
+
+// 			const { token } = response.data
+// 			dispatch(setToken(token))
+// 			navigate('/')
+// 		} catch (error) {
+// 			console.error('Google login failed:', error.response.data)
+// 		}
+// 	}
 
 const GoogleButton = () => {
-	const login = useGoogleLogin({
-		onSuccess: (tokenResponse) => console.log(tokenResponse),
-	})
+	const { signIn, isSignedIn } = useGoogleOAuth()
+
+	const handleGoogleLogin = async () => {
+		try {
+			if (!isSignedIn) {
+				await signIn()
+			}
+
+			// Ваш бекенд буде отримувати токени автоматично через обробник з Laravel Socialite
+
+			// Якщо вам потрібно взаємодіяти з бекендом, можете викликати його тут
+			const backendResponse = await axios.get('/auth/callback')
+
+			console.log('Backend response:', backendResponse.data)
+		} catch (error) {
+			console.error('Google login failed:', error)
+		}
+	}
 
 	return (
 		<div className="button-google">
-			<button onClick={login}>
+			<button onClick={handleGoogleLogin}>
 				<svg
 					aria-hidden="true"
 					className="native svg-icon iconGoogle"

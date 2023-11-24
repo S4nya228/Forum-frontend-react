@@ -17,7 +17,7 @@
 		flex-direction: column;
 		height: 100%;
 		background: #262d34;
-		padding: 4%;
+		padding: 50px;
 		min-height: 400px;
 		min-width: 320px;
 		max-width: 528px;
@@ -29,6 +29,7 @@
 		@media (max-width: 528px) {
 			gap: 35px;
 			border-radius: 0;
+			padding: 4%;
 			min-width: 100%;
 			min-height: 100%;
 			max-width: none;

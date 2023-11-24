@@ -10,12 +10,12 @@ import '../LoginWindow/LoginWindow.scss'
 const LoginComponent = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const [loginForm, setLoginForm] = useState({ email: '', password: '' })
+	const [error, setError] = useState(null)
 
 	const handleBack = () => {
 		navigate('/')
 	}
-	const [loginForm, setLoginForm] = useState({ email: '', password: '' })
-	const [error, setError] = useState(null)
 
 	const handleLogin = async () => {
 		const errors = {}
