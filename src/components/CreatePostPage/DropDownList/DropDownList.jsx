@@ -1,141 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import '../DropDownList/DropDownList.scss'
+import axiosInstance from '../../../api/axiosInstance'
 
 import Select from 'react-select'
 
-const options = [
-	{
-		value: 'Ukraine',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Ukraine</span>
-					<span className="react-select__desc-group">41,123,534 Followers</span>
-				</div>
+const generateGroupOption = (group) => ({
+	value: group.community_id,
+	label: (
+		<div className="react-select__group">
+			<img src="/image/icon-group.svg" alt="Item 2" />
+			<div className="react-select__info-box">
+				<span className="react-select__name-group">{group.name}</span>
+				<span className="react-select__desc-group">41,123,534 Followers</span>
 			</div>
-		),
-	},
-	{
-		value: 'irl_me',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">irl_me</span>
-					<span className="react-select__desc-group">1,123,534 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'Minecraft',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Minecraft</span>
-					<span className="react-select__desc-group">
-						2,111,324,534 Followers
-					</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'Counter Strike 2',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Counter Strike 2</span>
-					<span className="react-select__desc-group">21,343,534 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'Dota 2',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Dota 2</span>
-					<span className="react-select__desc-group">123,534 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'УжНУ',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">УжНУ</span>
-					<span className="react-select__desc-group">1,123,534 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'Олексійко',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Олексійко</span>
-					<span className="react-select__desc-group">31,123,534 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'ROBLOX',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">ROBLOX</span>
-					<span className="react-select__desc-group">34 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'Animals',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Animals</span>
-					<span className="react-select__desc-group">3,534 Followers</span>
-				</div>
-			</div>
-		),
-	},
-	{
-		value: 'Stone',
-		label: (
-			<div className="react-select__group">
-				<img src="/image/icon-group.svg" alt="Item 2" />
-				<div className="react-select__info-box">
-					<span className="react-select__name-group">Stone</span>
-					<span className="react-select__desc-group">
-						111,123,534 Followers
-					</span>
-				</div>
-			</div>
-		),
-	},
-]
+		</div>
+	),
+})
 
 const DropDownList = () => {
+	const [groupOptions, setGroupOptions] = useState([])
+
+	useEffect(() => {
+		const fetchGroups = async () => {
+			try {
+				const response = await axiosInstance.get('/client/community')
+				const groupsFromServer = response.data.data
+
+				if (Array.isArray(groupsFromServer)) {
+					const options = groupsFromServer.map(generateGroupOption)
+					setGroupOptions(options)
+				} else {
+					console.error('Data from server is not an array:', groupsFromServer)
+				}
+			} catch (error) {
+				console.error('Error:', error)
+			}
+		}
+		fetchGroups()
+	}, [])
+
 	return (
 		<Select
 			name="group"
-			options={options}
+			options={groupOptions}
 			unstyled
 			isClearable
 			noOptionsMessage={() => 'Group not found'}
