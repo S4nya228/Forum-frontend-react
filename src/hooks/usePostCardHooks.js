@@ -1,9 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import useTextAreaHooks from './useTextArea'
 import useListHandling from './useListHandling'
 
 const usePostCardHooks = () => {
-	const { textareaRef } = useTextAreaHooks()
 	const { isListOpen, toggleList, getDropdownStyles } = useListHandling()
 	const navigate = useNavigate()
 
@@ -21,7 +19,6 @@ const usePostCardHooks = () => {
 	}
 
 	return {
-		textareaRef,
 		isListOpen,
 		getDropdownStyles,
 		handleBack,

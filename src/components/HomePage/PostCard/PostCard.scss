@@ -146,12 +146,17 @@
 	&__text {
 		overflow: hidden;
 		position: relative;
-
-		&.tall {
-			&:before {
-				height: 40%;
-			}
-		}
+		color: #b8c5c9;
+		cursor: pointer;
+		width: 100%;
+		min-height: 100px;
+		max-height: 341px;
+		line-height: 1.5;
+		font-size: 1rem;
+		overflow-wrap: break-word;
+		white-space: pre-wrap;
+		text-align: justify;
+		overflow-y: hidden;
 
 		&:before {
 			content: '';
@@ -163,21 +168,10 @@
 			background: linear-gradient(to bottom, transparent 0%, #262d34 100%);
 		}
 
-		textarea {
-			color: #b8c5c9;
-			resize: none;
-			background: transparent;
-			border: none;
-			cursor: pointer;
-			width: 100%;
-			min-height: 100px;
-			max-height: 341px;
-			line-height: 1.5;
-			font-size: 1rem;
-			overflow-wrap: break-word;
-			white-space: pre-wrap;
-			text-align: justify;
-			overflow-y: hidden;
+		&.tall {
+			&:before {
+				height: 40%;
+			}
 		}
 	}
 

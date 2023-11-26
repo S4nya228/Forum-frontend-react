@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../PostCard/PostCard.scss'
 import { Link } from 'react-router-dom'
 import usePostCardHooks from '../../../hooks/usePostCardHooks'
+import DescriptionPost from './DescriptionPost/DescriptionPost'
+import axiosInstance from '../../../api/axiosInstance'
+import { formatDistanceToNow } from 'date-fns'
+import { parseISO } from 'date-fns/esm'
 
 const PostCard = () => {
 	const {
-		textareaRef,
-		handleTextareaInput,
 		handleBack,
 		stopPropagation,
 		handleButtonClickWithTwoEvents,
@@ -14,8 +16,23 @@ const PostCard = () => {
 		getDropdownStyles,
 	} = usePostCardHooks()
 
-	return (
-		<div onClick={handleBack} className="link-post">
+	const [posts, setPosts] = useState([])
+
+	useEffect(() => {
+		const fetchPosts = async () => {
+			try {
+				const response = await axiosInstance.get('/client/post')
+				setPosts(response.data.data)
+			} catch (error) {
+				console.error('Error fetching posts:', error)
+			}
+		}
+
+		fetchPosts()
+	}, [])
+
+	return posts.map((post) => (
+		<div onClick={handleBack} key={post.id} className="link-post">
 			<div className="link-post__container">
 				<div className="link-post__card">
 					<div className="link-post__voting">
@@ -36,7 +53,7 @@ const PostCard = () => {
 								}}
 							/>
 						</button>
-						<span>29</span>
+						<span>{post.post_upvotes}</span>
 						<button
 							className="link-post__vote-button"
 							onClick={stopPropagation}
@@ -71,7 +88,7 @@ const PostCard = () => {
 									className="link-post__name-group"
 									onClick={stopPropagation}
 								>
-									Ukraine_UA
+									{post.community.name}
 								</Link>
 							</div>
 							<span className="link-post__separator">•</span>
@@ -79,56 +96,19 @@ const PostCard = () => {
 								<span>posted by</span>
 								<div className="link-post__account">
 									<Link to="/account" onClick={stopPropagation}>
-										Sanya_228
+										{post.user_name}
 									</Link>
 								</div>
-								<span className="link-post__create-time">22 hours ago</span>
+								<span className="link-post__create-time">
+									{formatDistanceToNow(parseISO(post.created_at), {
+										addSuffix: true,
+									})}
+								</span>
 							</div>
 						</div>
 						<div className="link-post__box-info">
-							<div className="link-post__title">
-								What massively improved your mental health?
-							</div>
-							<div className="link-post__text">
-								<textarea
-									ref={textareaRef}
-									onInput={handleTextareaInput}
-									readOnly
-									name=""
-									id=""
-								>
-									Привіт. Недавно зі мною трапилася ситуація, пару неділь назад
-									я купував продукти в АТБ. І так трапилося що по прибуттю
-									додому я забув оплатити батарейки за 90 грн. Я їх просто кинув
-									в кишеню бо були зайняті руки і треба було дістати телефон та
-									й взагалі забув про ці батарейки бо після цього обидва хлягли
-									по хворобі. Однак, сьогодні моя дівчина прийшла в сльозах бо
-									сказала що в цьому магазині до неї в магазині докопався
-									охоронець і почав вимагати мої контакти і покликати мене,
-									вона, само собою нічого не дала. Охоронець почав показувати
-									запис де я кладу батарейки,розказувати які ми підозрілі, що я
-									зробив це спеціально, розказував про те що він СЛІДКУВАВ за
-									нами, знає де ми живемо, де ходимо ( це все ще батарейки за
-									100 грн), і почав вимагати її оплатити дві пачки замість
-									одної, при цьому він чек і все це забрав. В мене питання, хто
-									в ці ситуації правий? Привіт. Недавно зі мною трапилася
-									ситуація, пару неділь назад я купував продукти в АТБ. І так
-									трапилося що по прибуттю додому я забув оплатити батарейки за
-									90 грн. Я їх просто кинув в кишеню бо були зайняті руки і
-									треба було дістати телефон та й взагалі забув про ці батарейки
-									бо після цього обидва хлягли по хворобі. Однак, сьогодні моя
-									дівчина прийшла в сльозах бо сказала що в цьому магазині до
-									неї в магазині докопався охоронець і почав вимагати мої
-									контакти і покликати мене, вона, само собою нічого не дала.
-									Охоронець почав показувати запис де я кладу
-									батарейки,розказувати які ми підозрілі, що я зробив це
-									спеціально, розказував про те що він СЛІДКУВАВ за нами, знає
-									де ми живемо, де ходимо ( це все ще батарейки за 100 грн), і
-									почав вимагати її оплатити дві пачки замість одної, при цьому
-									він чек і все це забрав. В мене питання, хто в ці ситуації
-									правий?
-								</textarea>
-							</div>
+							<div className="link-post__title">{post.title}</div>
+							<DescriptionPost>{post.description}</DescriptionPost>
 						</div>
 						<div className="link-post__functional">
 							<Link
@@ -137,7 +117,7 @@ const PostCard = () => {
 								onClick={stopPropagation}
 							>
 								<img src="/image/comentIcon.svg" alt="icon comments" />
-								<span>8</span>
+								<span>{post.post_comments}</span>
 								<span>Comments</span>
 							</Link>
 							<div className="link-post__share">
@@ -199,7 +179,7 @@ const PostCard = () => {
 				</div>
 			</div>
 		</div>
-	)
+	))
 }
 
 export default PostCard
