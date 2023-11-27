@@ -1,24 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import Select from 'react-select'
+import axiosInstance from '../../../api/axiosInstance'
+import PropTypes from 'prop-types'
 
 import '../DropDownList/DropDownList.scss'
-import axiosInstance from '../../../api/axiosInstance'
 
-import Select from 'react-select'
-
-const generateGroupOption = (group) => ({
-	value: group.community_id,
-	label: (
-		<div className="react-select__group">
-			<img src="/image/icon-group.svg" alt="Item 2" />
-			<div className="react-select__info-box">
-				<span className="react-select__name-group">{group.name}</span>
-				<span className="react-select__desc-group">41,123,534 Followers</span>
-			</div>
-		</div>
-	),
-})
-
-const DropDownList = () => {
+const DropDownList = ({ onChange }) => {
 	const [groupOptions, setGroupOptions] = useState([])
 
 	useEffect(() => {
@@ -37,13 +24,28 @@ const DropDownList = () => {
 				console.error('Error:', error)
 			}
 		}
+
 		fetchGroups()
 	}, [])
+
+	const generateGroupOption = (group) => ({
+		value: group.community_id,
+		label: (
+			<div className="react-select__group">
+				<img src="/image/icon-group.svg" alt="Item 2" />
+				<div className="react-select__info-box">
+					<span className="react-select__name-group">{group.name}</span>
+					<span className="react-select__desc-group">41,123,534 Followers</span>
+				</div>
+			</div>
+		),
+	})
 
 	return (
 		<Select
 			name="group"
 			options={groupOptions}
+			onChange={onChange}
 			unstyled
 			isClearable
 			noOptionsMessage={() => 'Group not found'}
@@ -54,4 +56,7 @@ const DropDownList = () => {
 	)
 }
 
+DropDownList.propTypes = {
+	onChange: PropTypes.func.isRequired,
+}
 export default DropDownList

@@ -53,7 +53,7 @@ const PostCard = () => {
 								}}
 							/>
 						</button>
-						<span>{post.post_upvotes}</span>
+						<span>{post.post_info.post_upvotes_count}</span>
 						<button
 							className="link-post__vote-button"
 							onClick={stopPropagation}
@@ -88,7 +88,7 @@ const PostCard = () => {
 									className="link-post__name-group"
 									onClick={stopPropagation}
 								>
-									{post.community.name}
+									{post.community_info.name}
 								</Link>
 							</div>
 							<span className="link-post__separator">•</span>
@@ -96,7 +96,7 @@ const PostCard = () => {
 								<span>posted by</span>
 								<div className="link-post__account">
 									<Link to="/account" onClick={stopPropagation}>
-										{post.user_name}
+										{post.user_info.user_name}
 									</Link>
 								</div>
 								<span className="link-post__create-time">
@@ -117,7 +117,7 @@ const PostCard = () => {
 								onClick={stopPropagation}
 							>
 								<img src="/image/comentIcon.svg" alt="icon comments" />
-								<span>{post.post_comments}</span>
+								<span>{post.post_info.post_comments_count}</span>
 								<span>Comments</span>
 							</Link>
 							<div className="link-post__share">

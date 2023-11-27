@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../components/CreatePostPage/CreatePostPage.scss'
 import DropDownList from './DropDownList/DropDownList'
 import useMaxLenght from '../../hooks/useMaxLenght'
@@ -6,6 +6,8 @@ import usePhotoUpload from '../../hooks/usePhotoUpload'
 import usePostModeSwitch from '../../hooks/usePostModeSwitch'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
+import axiosInstance from '../../api/axiosInstance'
+import { useSelector } from 'react-redux'
 
 const CreatePostPage = () => {
 	const {
@@ -18,8 +20,13 @@ const CreatePostPage = () => {
 	} = useMaxLenght()
 
 	const { selectedFile, handleFileChange, handleDeleteFile } = usePhotoUpload()
-
 	const { postMode, switchToImageMode, switchToTextMode } = usePostModeSwitch()
+	const [selectedGroup, setSelectedGroup] = useState(null)
+	const token = useSelector((state) => state.auth.token)
+
+	const handleGroupChange = (selectedOption) => {
+		setSelectedGroup(selectedOption)
+	}
 
 	const autoExpand = (field) => {
 		field.style.height = 'inherit'
@@ -33,7 +40,7 @@ const CreatePostPage = () => {
 			if (monitor) {
 				const files = monitor.getItem().files
 				if (files && files.length > 0) {
-					const acceptedFiles = files.filter(
+					const acceptedFiles = Array.from(files).filter(
 						(file) =>
 							file.type === 'image/png' ||
 							file.type === 'image/jpg' ||
@@ -42,7 +49,7 @@ const CreatePostPage = () => {
 							file.type === 'image/webp'
 					)
 					if (acceptedFiles.length > 0) {
-						handleFileChange({ target: { files: acceptedFiles } })
+						handleFileChange(acceptedFiles[0])
 					}
 				}
 			}
@@ -55,6 +62,36 @@ const CreatePostPage = () => {
 
 	const isActive = canDrop && isOver
 
+	const handleCreatePost = async () => {
+		try {
+			console.log('Data before sending:', {
+				community_id: selectedGroup ? selectedGroup.value : null,
+				title: title,
+				description: postMode === 'text' ? description : '',
+				image: postMode === 'image' ? selectedFile : undefined,
+			})
+
+			const response = await axiosInstance.post(
+				'/client/post',
+				{
+					community_id: selectedGroup ? selectedGroup.value : null,
+					title: title,
+					description: postMode === 'text' ? description : '',
+					image: postMode === 'image' ? selectedFile : undefined,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			)
+
+			console.log(response)
+		} catch (error) {
+			console.error('error:', error.response)
+		}
+	}
+
 	return (
 		<div className="create-post-page">
 			<div className="create-post-page__container">
@@ -63,7 +100,7 @@ const CreatePostPage = () => {
 						<span>Create a post</span>
 					</div>
 					<div className="create-post-page__choose-group">
-						<DropDownList />
+						<DropDownList onChange={handleGroupChange} value={selectedGroup} />
 					</div>
 					<div className="create-post-page__box">
 						<div className="create-post-page__option">
@@ -118,7 +155,6 @@ const CreatePostPage = () => {
 								>
 									{!selectedFile && (
 										<label className="create-post-page__input-label">
-											{/* Змініть текст відповідно */}
 											<span className="create-post-page__input-text">
 												{isActive
 													? 'Drop the image here'
@@ -127,7 +163,7 @@ const CreatePostPage = () => {
 											<input
 												type="file"
 												className="create-post-page__input"
-												onChange={handleFileChange}
+												onChange={(e) => handleFileChange(e.target.files)}
 												accept="image/png,image/gif,image/jpeg,image/webp"
 											/>
 											<span className="create-post-page__input-button">
@@ -156,7 +192,7 @@ const CreatePostPage = () => {
 							</div>
 						)}
 						<div className="create-post-page__create-button">
-							<button>Post</button>
+							<button onClick={handleCreatePost}>Post</button>
 						</div>
 					</div>
 				</div>

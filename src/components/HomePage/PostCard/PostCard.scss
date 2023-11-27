@@ -54,13 +54,22 @@
 		&:hover {
 			background: #2c353d;
 		}
+
+		.arrow-up {
+			min-width: 30px;
+			min-height: 30px;
+		}
+		.arrow-down {
+			min-width: 30px;
+			min-height: 30px;
+		}
 	}
 
 	&__main {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-		width: 100%;
+		width: 90%;
 	}
 
 	&__information {
@@ -129,6 +138,7 @@
 	&__box-info {
 		display: flex;
 		flex-direction: column;
+
 		gap: 10px;
 	}
 
@@ -136,6 +146,7 @@
 		color: #f4f6f8;
 		font-weight: 600;
 		font-size: 1.25rem;
+		word-wrap: break-word;
 
 		@media (max-width: 768px) {
 			font-size: 1rem;
@@ -153,10 +164,8 @@
 		max-height: 341px;
 		line-height: 1.5;
 		font-size: 1rem;
-		overflow-wrap: break-word;
-		white-space: pre-wrap;
 		text-align: justify;
-		overflow-y: hidden;
+		word-wrap: break-word;
 
 		&:before {
 			content: '';

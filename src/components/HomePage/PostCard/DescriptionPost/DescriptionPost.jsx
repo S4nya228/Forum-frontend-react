@@ -12,10 +12,8 @@ const DescriptionPost = ({ children }) => {
 			autoHeightDiv.scrollHeight > 300 &&
 			autoHeightDiv.scrollHeight !== autoHeightDiv.clientHeight
 		) {
-			console.log('Adding tall class')
 			autoHeightDiv.classList.add('tall')
 		} else {
-			console.log('Removing tall class')
 			autoHeightDiv.classList.remove('tall')
 		}
 	}, [children])
