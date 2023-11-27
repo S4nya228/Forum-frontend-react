@@ -44,10 +44,11 @@ function App() {
 					<Route
 						path="/create-post"
 						element={
-							<ProtectedRoute
-								element={<CreatePostPage />}
-								redirectTo="/login"
-							/>
+							<CreatePostPage />
+							// <ProtectedRoute
+							// 	element={<CreatePostPage />}
+							// 	redirectTo="/login"
+							// />
 						}
 					/>
 					<Route

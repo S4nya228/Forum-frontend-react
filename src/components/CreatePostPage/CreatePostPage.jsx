@@ -40,7 +40,7 @@ const CreatePostPage = () => {
 			if (monitor) {
 				const files = monitor.getItem().files
 				if (files && files.length > 0) {
-					const acceptedFiles = Array.from(files).filter(
+					const acceptedFiles = files.filter(
 						(file) =>
 							file.type === 'image/png' ||
 							file.type === 'image/jpg' ||
@@ -49,7 +49,7 @@ const CreatePostPage = () => {
 							file.type === 'image/webp'
 					)
 					if (acceptedFiles.length > 0) {
-						handleFileChange(acceptedFiles[0])
+						handleFileChange({ target: { files: acceptedFiles } })
 					}
 				}
 			}
@@ -64,27 +64,27 @@ const CreatePostPage = () => {
 
 	const handleCreatePost = async () => {
 		try {
-			console.log('Data before sending:', {
+			const postData = {
 				community_id: selectedGroup ? selectedGroup.value : null,
 				title: title,
-				description: postMode === 'text' ? description : '',
-				image: postMode === 'image' ? selectedFile : undefined,
+			}
+
+			if (postMode === 'text') {
+				postData.description = description
+			} else if (postMode === 'image') {
+				postData.image = selectedFile
+			}
+
+			console.log('Data before sending:', {
+				postData,
 			})
 
-			const response = await axiosInstance.post(
-				'/client/post',
-				{
-					community_id: selectedGroup ? selectedGroup.value : null,
-					title: title,
-					description: postMode === 'text' ? description : '',
-					image: postMode === 'image' ? selectedFile : undefined,
+			const response = await axiosInstance.post('/client/post', postData, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-Type': 'multipart/form-data',
 				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			)
+			})
 
 			console.log(response)
 		} catch (error) {
@@ -163,8 +163,8 @@ const CreatePostPage = () => {
 											<input
 												type="file"
 												className="create-post-page__input"
-												onChange={(e) => handleFileChange(e.target.files)}
-												accept="image/png,image/gif,image/jpeg,image/webp"
+												onChange={handleFileChange}
+												accept="image/png,image/jpg,image/gif,image/jpeg,image/webp"
 											/>
 											<span className="create-post-page__input-button">
 												Upload
