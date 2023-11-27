@@ -21,7 +21,11 @@ const PostCard = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
-				const response = await axiosInstance.get('/client/post')
+				const response = await axiosInstance.get('/client/post', {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				})
 				setPosts(response.data.data)
 			} catch (error) {
 				console.error('Error fetching posts:', error)
@@ -81,7 +85,14 @@ const PostCard = () => {
 									className="link-post__icon-group"
 									onClick={stopPropagation}
 								>
-									<img src="/image/icon-group.svg" alt="icon group" />
+									{post && post.community_info.avatar_path ? (
+										<img
+											src={post.community_info.avatar_path}
+											alt="icon group"
+										/>
+									) : (
+										<img src="/image/icon-group.svg" alt="icon group" />
+									)}
 								</Link>
 								<Link
 									to="/group"
@@ -109,6 +120,9 @@ const PostCard = () => {
 						<div className="link-post__box-info">
 							<div className="link-post__title">{post.title}</div>
 							<DescriptionPost>{post.description}</DescriptionPost>
+							<div className="link-post__image">
+								<img src={post.image} alt="image for post" />
+							</div>
 						</div>
 						<div className="link-post__functional">
 							<Link
