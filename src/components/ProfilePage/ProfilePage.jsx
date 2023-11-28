@@ -13,7 +13,7 @@ const ProfilePage = () => {
 			<div className="profile-page__container">
 				<div className="profile-page__main">
 					<ProfileMenu />
-					<PostCard />
+					<PostCard userPosts={userId ? true : false} />
 				</div>
 				<div className="profile-page__card-profile">
 					<CardProfile userId={userId} />

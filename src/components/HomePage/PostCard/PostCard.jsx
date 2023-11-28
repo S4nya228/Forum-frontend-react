@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../PostCard/PostCard.scss'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import usePostCardHooks from '../../../hooks/usePostCardHooks'
 import DescriptionPost from './DescriptionPost/DescriptionPost'
 import axiosInstance from '../../../api/axiosInstance'
@@ -8,7 +8,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
 import UserAccount from './UserAccount/UserAccount'
 
-const PostCard = () => {
+const PostCard = ({ userPosts }) => {
 	const {
 		handleBack,
 		stopPropagation,
@@ -18,23 +18,25 @@ const PostCard = () => {
 	} = usePostCardHooks()
 
 	const [posts, setPosts] = useState([])
+	const { userId } = useParams()
 
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
-				const response = await axiosInstance.get('/client/post', {
+				const endpoint = userPosts ? `/user/id/${userId}` : '/client/post'
+				const response = await axiosInstance.get(endpoint, {
 					headers: {
 						'Content-Type': 'application/json',
 					},
 				})
-				setPosts(response.data.data)
+				setPosts(response.data.data.post ?? response.data.data)
 			} catch (error) {
 				console.error('Error fetching posts:', error)
 			}
 		}
 
 		fetchPosts()
-	}, [])
+	}, [userPosts, userId])
 
 	return posts.map((post) => (
 		<div onClick={handleBack} key={post.id} className="link-post">

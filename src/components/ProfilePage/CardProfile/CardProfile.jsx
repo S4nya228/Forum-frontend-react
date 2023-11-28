@@ -60,7 +60,10 @@ const CardProfile = ({ userId }) => {
 				})
 
 				if (response.data.data) {
-					setUserData({ ...response.data.data, formattedDate: formattedDate })
+					setUserData({
+						...response.data.data,
+						formattedDate: formattedDate,
+					})
 				} else {
 					console.error('Дані користувача не отримані.')
 				}
