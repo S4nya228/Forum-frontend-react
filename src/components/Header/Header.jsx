@@ -14,7 +14,7 @@ const Header = () => {
 	useEffect(() => {
 		const fetchUserData = async () => {
 			try {
-				const response = await axiosInstance.get('/user', {
+				const response = await axiosInstance.get('/user/id', {
 					headers: {
 						Authorization: `Bearer ${token}`,
 						'Content-Type': 'application/json',

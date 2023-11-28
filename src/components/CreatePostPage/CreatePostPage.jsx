@@ -8,6 +8,7 @@ import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 import axiosInstance from '../../api/axiosInstance'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const CreatePostPage = () => {
 	const {
@@ -23,6 +24,7 @@ const CreatePostPage = () => {
 	const { postMode, switchToImageMode, switchToTextMode } = usePostModeSwitch()
 	const [selectedGroup, setSelectedGroup] = useState(null)
 	const token = useSelector((state) => state.auth.token)
+	const navigate = useNavigate()
 
 	const handleGroupChange = (selectedOption) => {
 		setSelectedGroup(selectedOption)
@@ -75,10 +77,6 @@ const CreatePostPage = () => {
 				postData.image = selectedFile
 			}
 
-			console.log('Data before sending:', {
-				postData,
-			})
-
 			const response = await axiosInstance.post('/client/post', postData, {
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -86,6 +84,7 @@ const CreatePostPage = () => {
 				},
 			})
 
+			navigate('/')
 			console.log(response)
 		} catch (error) {
 			console.error('error:', error.response)

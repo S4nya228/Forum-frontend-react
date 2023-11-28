@@ -99,7 +99,7 @@ const CardProfile = ({ userId }) => {
 								src="/image/icon_create-post.svg"
 								alt="icon for count post"
 							/>
-							{userData && <span>{userData.posts_count} &nbsp; posts</span>}
+							{userData && <span>{userData.posts_count} posts</span>}
 						</div>
 						<div className="card-profile__registration-date">
 							<img src="/image/reg_day.svg" alt="icon for reg date" />
