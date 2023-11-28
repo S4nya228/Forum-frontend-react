@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreateGroup from '../../CreateGroup/CreateGroup'
 import '../CardProfile/CardProfile.scss'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import axiosInstance from '../../../api/axiosInstance'
 import { clearToken } from '../../../store/authSlise'
 import { clearUser } from '../../../store/userSlise'
+import PropTypes from 'prop-types'
 
-const CardProfile = () => {
+const CardProfile = ({ userId }) => {
 	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
+	const [userData, setUserData] = useState(null)
 	const token = useSelector((state) => state.auth.token)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
@@ -44,6 +46,32 @@ const CardProfile = () => {
 		document.body.style.overflow = 'auto'
 	}
 
+	useEffect(() => {
+		const fetchUserData = async () => {
+			try {
+				const response = await axiosInstance.get(`/user/id/${userId}`)
+
+				const createdDate = new Date(response.data.data.created_at)
+
+				const formattedDate = createdDate.toLocaleDateString('en-US', {
+					month: 'long',
+					day: 'numeric',
+					year: 'numeric',
+				})
+
+				if (response.data.data) {
+					setUserData({ ...response.data.data, formattedDate: formattedDate })
+				} else {
+					console.error('Дані користувача не отримані.')
+				}
+			} catch (error) {
+				console.error('Помилка при отриманні даних користувача:', error)
+			}
+		}
+
+		fetchUserData()
+	}, [userId])
+
 	return (
 		<div className="card-profile">
 			<div className="card-profile__container">
@@ -60,13 +88,10 @@ const CardProfile = () => {
 				</div>
 				<div className="card-profile__information-box">
 					<div className="card-profile__nickname">
-						<span>Sanya_228</span>
+						{userData && <span>{userData.name}</span>}
 					</div>
 					<div className="card-profile__description">
-						<span>
-							Творчий ентузіаст з пасією до технологій. Вдосконалюю світ кодом
-							та дизайном. Завжди готовий до викликів та пошуку нового.
-						</span>
+						{userData && <span>{userData.description}</span>}
 					</div>
 					<div className="card-profile__more-info">
 						<div className="card-profile__count-posts">
@@ -74,11 +99,11 @@ const CardProfile = () => {
 								src="/image/icon_create-post.svg"
 								alt="icon for count post"
 							/>
-							<span>314 posts</span>
+							{userData && <span>{userData.posts_count} &nbsp; posts</span>}
 						</div>
 						<div className="card-profile__registration-date">
 							<img src="/image/reg_day.svg" alt="icon for reg date" />
-							<span>November 20, 2023</span>
+							{userData && <span>{userData.formattedDate}</span>}
 						</div>
 					</div>
 				</div>
@@ -108,6 +133,10 @@ const CardProfile = () => {
 			</div>
 		</div>
 	)
+}
+
+CardProfile.propTypes = {
+	userId: PropTypes.number.isRequired,
 }
 
 export default CardProfile

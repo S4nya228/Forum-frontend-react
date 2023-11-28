@@ -6,6 +6,7 @@ import DescriptionPost from './DescriptionPost/DescriptionPost'
 import axiosInstance from '../../../api/axiosInstance'
 import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
+import UserAccount from './UserAccount/UserAccount'
 
 const PostCard = () => {
 	const {
@@ -106,9 +107,10 @@ const PostCard = () => {
 							<div className="link-post__author">
 								<span>posted by</span>
 								<div className="link-post__account">
-									<Link to="/account" onClick={stopPropagation}>
-										{post.user_info.user_name}
-									</Link>
+									<UserAccount
+										userId={post.user_info.user_id}
+										userName={post.user_info.user_name}
+									/>
 								</div>
 								<span className="link-post__create-time">
 									{formatDistanceToNow(parseISO(post.created_at), {

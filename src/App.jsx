@@ -41,14 +41,14 @@ function App() {
 					<Route path="/register" element={<RegistrationComponent />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
 					<Route path="/post" element={<PostPage />} />
+					<Route path="/user/id/:userId" element={<ProfilePage />} />
 					<Route
 						path="/create-post"
 						element={
-							<CreatePostPage />
-							// <ProtectedRoute
-							// 	element={<CreatePostPage />}
-							// 	redirectTo="/login"
-							// />
+							<ProtectedRoute
+								element={<CreatePostPage />}
+								redirectTo="/login"
+							/>
 						}
 					/>
 					<Route
