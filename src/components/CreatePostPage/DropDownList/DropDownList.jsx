@@ -35,7 +35,7 @@ const DropDownList = ({ onChange }) => {
 				<img src="/image/icon-group.svg" alt="Item 2" />
 				<div className="react-select__info-box">
 					<span className="react-select__name-group">{group.name}</span>
-					<span className="react-select__desc-group">41,123,534 Followers</span>
+					<span className="react-select__desc-group">{`${group.subcriber_count} subscribers`}</span>
 				</div>
 			</div>
 		),

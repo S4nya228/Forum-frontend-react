@@ -49,7 +49,9 @@ const PostInformation = () => {
 							</div>
 							<div className="post-info__author">
 								<span>posted by</span>
-								<Link to="/profile"> {postData.user_info.user_name}</Link>
+								<Link to={`/user/id/${postData.user_info.user_id}`}>
+									{postData.user_info.user_name}
+								</Link>
 							</div>
 						</div>
 					</div>
