@@ -75,7 +75,6 @@ const RegistrationComponent = () => {
 			})
 
 			dispatch(setToken(response.data.token))
-			console.log(response.data)
 
 			navigate('/')
 		} catch (error) {

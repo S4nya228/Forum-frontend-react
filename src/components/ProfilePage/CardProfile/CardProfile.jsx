@@ -12,6 +12,10 @@ const CardProfile = ({ userId }) => {
 	const [isCreateGroupVisible, setCreateGroupVisible] = useState(false)
 	const [userData, setUserData] = useState(null)
 	const token = useSelector((state) => state.auth.token)
+	const authenticatedUserId = useSelector(
+		(state) => state.user.user && state.user.user.user_id
+	)
+	const userIdNumber = parseInt(userId, 10)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
@@ -86,9 +90,11 @@ const CardProfile = ({ userId }) => {
 						<img src="/image/Avatar.svg" alt="avatar user" />
 					</div>
 				</div>
-				<div className="card-profile__settings">
-					<img src="/image/settings.svg" alt="icon for settings" />
-				</div>
+				{token && authenticatedUserId == userIdNumber && (
+					<div className="card-profile__settings">
+						<img src="/image/settings.svg" alt="icon for settings" />
+					</div>
+				)}
 				<div className="card-profile__information-box">
 					<div className="card-profile__nickname">
 						{userData && <span>{userData.name}</span>}
@@ -110,29 +116,33 @@ const CardProfile = ({ userId }) => {
 						</div>
 					</div>
 				</div>
-				<div className="card-profile__button-actions">
-					<div
-						className="card-profile__create-group"
-						onClick={handleCreateGroupClick}
-					>
-						<button onClick={handleCreateGroupClick}>Create group</button>
+				{token && authenticatedUserId == userIdNumber && (
+					<div className="card-profile__button-actions">
+						<div
+							className="card-profile__create-group"
+							onClick={handleCreateGroupClick}
+						>
+							<button onClick={handleCreateGroupClick}>Create group</button>
+						</div>
+						<Link to="/create-post" className="card-profile__create-post">
+							<button>Create post</button>
+						</Link>
 					</div>
-					<Link to="/create-post" className="card-profile__create-post">
-						<button>Create post</button>
-					</Link>
-				</div>
+				)}
 				{isCreateGroupVisible && (
 					<CreateGroup onClose={handleCloseCreateGroup} />
 				)}
-				<div className="card-profile__logout">
-					<button
-						className="card-profile__logout-button"
-						onClick={handleLogout}
-					>
-						<img src="/image/logout.svg" alt="icon for logout" />
-						<span>Log out</span>
-					</button>
-				</div>
+				{token && authenticatedUserId == userIdNumber && (
+					<div className="card-profile__logout">
+						<button
+							className="card-profile__logout-button"
+							onClick={handleLogout}
+						>
+							<img src="/image/logout.svg" alt="icon for logout" />
+							<span>Log out</span>
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	)

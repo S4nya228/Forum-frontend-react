@@ -14,7 +14,7 @@ const Menu = () => {
 					<Link className="menu__action">
 						<img src="/image/mob_icon_group.svg" alt="" />
 					</Link>
-					<Link className="menu__action">
+					<Link to="/create-post" className="menu__action">
 						<img src="/image/mob_icon_create.svg" alt="icon create post" />
 					</Link>
 					<Link className="menu__action">
