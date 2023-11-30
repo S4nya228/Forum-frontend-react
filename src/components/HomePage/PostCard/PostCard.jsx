@@ -137,13 +137,6 @@ const PostCard = ({ userPosts }) => {
 									<span>{post.post_info.post_comments_count}</span>
 									<span>Comments</span>
 								</Link>
-								<div className="link-post__share">
-									<button type="button" onClick={stopPropagation}>
-										<img src="/image/sharePost.svg" alt="icon share post" />
-										&nbsp;
-										<span>Share</span>
-									</button>
-								</div>
 								<div className="link-post__save">
 									<button type="button" onClick={stopPropagation}>
 										<img src="/image/savePost.svg" alt="icon save post" />
