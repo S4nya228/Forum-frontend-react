@@ -31,6 +31,8 @@ ProtectedRoute.propTypes = {
 }
 
 function App() {
+	const user = useSelector((state) => state.user.user)
+
 	return (
 		<BrowserRouter>
 			<div className="App">
@@ -54,7 +56,10 @@ function App() {
 					<Route
 						path="/profile"
 						element={
-							<ProtectedRoute element={<ProfilePage />} redirectTo="/login" />
+							<ProtectedRoute
+								element={<ProfilePage />}
+								redirectTo={user ? `/user/id/${user.user_id}` : '/login'}
+							/>
 						}
 					/>
 				</Routes>
