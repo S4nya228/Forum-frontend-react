@@ -53,7 +53,11 @@ const useListHandling = () => {
 		}
 	}
 
-	return { isListOpen, toggleList, getDropdownStyles }
+	return {
+		isListOpen,
+		toggleList,
+		getDropdownStyles,
+	}
 }
 
 export default useListHandling

@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import '../PostCard/PostCard.scss'
 import { Link, useParams } from 'react-router-dom'
-import usePostCardHooks from '../../../hooks/usePostCardHooks'
 import DescriptionPost from './DescriptionPost/DescriptionPost'
 import axiosInstance from '../../../api/axiosInstance'
 import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
 import UserAccount from './UserAccount/UserAccount'
 import PostLink from './PostLink/PostLink'
+import Another from './ButtonAnother/Another/Another'
 
 const PostCard = ({ userPosts }) => {
 	const [posts, setPosts] = useState([])
 	const { userId } = useParams()
-
-	const {
-		stopPropagation,
-		handleButtonClickWithTwoEvents,
-		isListOpen,
-		getDropdownStyles,
-	} = usePostCardHooks()
 
 	useEffect(() => {
 		const fetchPosts = async () => {
@@ -37,6 +30,10 @@ const PostCard = ({ userPosts }) => {
 
 		fetchPosts()
 	}, [userPosts, userId])
+
+	const stopPropagation = (event) => {
+		event.stopPropagation()
+	}
 
 	return posts.map((post) =>
 		post.post_id ? (
@@ -153,50 +150,7 @@ const PostCard = ({ userPosts }) => {
 										<span>Save</span>
 									</button>
 								</div>
-								<div className="link-post__another">
-									<button
-										type="button"
-										onClick={(event) => handleButtonClickWithTwoEvents(event)}
-									>
-										•••
-									</button>
-									{isListOpen && (
-										<ul
-											className="link-post__action-list"
-											onClick={stopPropagation}
-											style={getDropdownStyles()}
-										>
-											<li className="link-post__list-item-save">
-												<img
-													src="/image/savePost.svg"
-													alt="icon for save post"
-												/>{' '}
-												<span>Save</span>
-											</li>
-											<li className="link-post__list-item">
-												<img
-													src="/image/mute_group.svg"
-													alt="icon for mute group"
-												/>{' '}
-												<span>Mute group</span>
-											</li>
-											<li className="link-post__list-item">
-												<img
-													src="/image/hide_post.svg"
-													alt="icon for hide post"
-												/>{' '}
-												<span>Hide</span>
-											</li>
-											<li className="link-post__list-item">
-												<img
-													src="/image/report_post.svg"
-													alt="icon for report post"
-												/>{' '}
-												<span>Report</span>
-											</li>
-										</ul>
-									)}
-								</div>
+								<Another key={post.postId} cardData={post} />
 							</div>
 						</div>
 					</div>

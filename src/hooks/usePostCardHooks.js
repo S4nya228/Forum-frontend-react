@@ -1,7 +1,8 @@
 import useListHandling from './useListHandling'
 
 const usePostCardHooks = () => {
-	const { isListOpen, toggleList, getDropdownStyles } = useListHandling()
+	const { isListOpen, toggleList, getDropdownStyles, setActiveCardId } =
+		useListHandling()
 
 	const stopPropagation = (event) => {
 		event.stopPropagation()
@@ -18,6 +19,7 @@ const usePostCardHooks = () => {
 		stopPropagation,
 		handleButtonClickWithTwoEvents,
 		toggleList,
+		setActiveCardId,
 	}
 }
 
