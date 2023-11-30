@@ -7,9 +7,7 @@ const CreatePost = () => {
 		<div className="create-post">
 			<div className="create-post__container">
 				<div className="create-post__icon">
-					<Link to="/profile">
-						<img src="/image/Avatar.svg" alt="avatar" />
-					</Link>
+					<img src="/image/Avatar.svg" alt="avatar" />
 				</div>
 				<div className="create-post__input-data">
 					<Link to="/create-post">

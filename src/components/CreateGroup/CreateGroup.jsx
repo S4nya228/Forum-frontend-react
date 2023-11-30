@@ -32,7 +32,7 @@ const CreateGroup = ({ onClose }) => {
 				}
 			)
 			console.log('response:', response)
-			setIsVisible(false)
+			handleCloseClick()
 		} catch (error) {
 			console.error('error:', error.response)
 		}

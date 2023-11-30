@@ -31,10 +31,8 @@ const useListHandling = () => {
 		const screenHeight = window.innerHeight
 
 		if (buttonRect.top < screenHeight / 2) {
-			// If the button is closer to the top half of the screen
 			return 'down'
 		} else {
-			// If the button is closer to the bottom half of the screen
 			return 'up'
 		}
 	}
