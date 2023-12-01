@@ -14,7 +14,7 @@ const PostPage = () => {
 					<PostInformation postId={postId} />
 				</div>
 				<div className="post-page__aside">
-					<AsideForPost />
+					<AsideForPost postId={postId} />
 				</div>
 			</div>
 		</div>
