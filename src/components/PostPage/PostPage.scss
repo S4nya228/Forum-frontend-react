@@ -29,6 +29,7 @@
 
 	&__main {
 		display: flex;
+		flex-direction: column;
 		background-color: #262d34;
 		border-radius: 10px;
 		width: clamp(15.625rem, 60%, 55.125rem);

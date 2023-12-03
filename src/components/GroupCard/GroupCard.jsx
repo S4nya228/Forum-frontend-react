@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import '../GroupCard/GroupCard.scss'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../../api/axiosInstance'
-import { setSubscribed } from '../../store/userSlise'
 
 const GroupCard = () => {
 	const token = useSelector((state) => state.auth.token)
 	const [groupData, setGroupData] = useState(null)
+	const [isSubscribed, setIsSubscribed] = useState(false)
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
 	const { postId } = useParams()
-	const subscribedData = useSelector(
-		(state) => state.user.subscriptions[postId]
-	)
-	const [isSubscribed, setIsSubscribed] = useState(subscribedData)
 
 	useEffect(() => {
 		const fetchGroupData = async () => {
@@ -58,9 +53,6 @@ const GroupCard = () => {
 							'Content-Type': 'application/json',
 						},
 					}
-				)
-				dispatch(
-					setSubscribed({ groupId: postId, isSubscribed: !isSubscribed })
 				)
 				setIsSubscribed(!isSubscribed)
 			} catch (error) {
