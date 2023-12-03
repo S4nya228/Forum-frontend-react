@@ -43,7 +43,6 @@ function App() {
 					<Route path="/register" element={<RegistrationComponent />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
 					<Route path="/post/id/:postId" element={<PostPage />} />
-					<Route path="/post" element={<PostPage />} />
 					<Route path="/user/id/:userId" element={<ProfilePage />} />
 					<Route
 						path="/create-post"
