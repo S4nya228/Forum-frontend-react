@@ -32,6 +32,10 @@ const Header = () => {
 		}
 	}, [token, user, dispatch])
 
+	const avatarPath = user
+		? `${axiosInstance.defaults.baseURL}/getImage/${user.avatar}`
+		: ''
+
 	return (
 		<header className="header">
 			<div className="header__container">
@@ -71,11 +75,7 @@ const Header = () => {
 							to={`/user/id/${user ? user.user_id : ''}`}
 							className="header__auth-user"
 						>
-							{user && user.avatar ? (
-								<img src={user.avatar} alt="avatar user" />
-							) : (
-								<img src="/image/Avatar.svg" alt="default avatar" />
-							)}
+							<img src={avatarPath} alt="avatar user" />
 							<span>{user ? user.name : ''}</span>
 						</Link>
 					) : (

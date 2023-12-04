@@ -79,6 +79,10 @@ const CardProfile = ({ userId }) => {
 		fetchUserData()
 	}, [userId])
 
+	const avatarPath = userData
+		? `${axiosInstance.defaults.baseURL}/getImage/${userData.avatar}`
+		: ''
+
 	return (
 		<div className="card-profile">
 			<div className="card-profile__container">
@@ -87,7 +91,7 @@ const CardProfile = ({ userId }) => {
 						<img src="/image/banner.jpg" alt="banner for profile" />
 					</div>
 					<div className="card-profile__avatar">
-						<img src="/image/Avatar.svg" alt="avatar user" />
+						<img src={avatarPath} alt="avatar user" />
 					</div>
 				</div>
 				{token && authenticatedUserId == userIdNumber && (

@@ -99,6 +99,18 @@
 		height: auto;
 	}
 
+	&__image {
+		text-align: center;
+		img {
+			max-height: 512px;
+			max-width: 100%;
+			width: auto;
+			height: auto;
+			margin: 0 auto;
+			display: block;
+		}
+	}
+
 	&__functional {
 		display: flex;
 		align-items: center;

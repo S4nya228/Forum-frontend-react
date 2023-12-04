@@ -25,6 +25,11 @@ const PostInformation = () => {
 		fetchPostData()
 	}, [postId])
 
+	const postImage =
+		postData && postData.image
+			? `${axiosInstance.defaults.baseURL}/getImage/${postData.image}`
+			: ''
+
 	return (
 		<div className="post-info">
 			{postData ? (
@@ -57,7 +62,13 @@ const PostInformation = () => {
 					</div>
 					<div className="post-info__box-info">
 						<div className="post-info__title">{postData.title}</div>
-						<div className="post-info__text">{postData.description}</div>
+						{postImage ? (
+							<div className="link-post__image">
+								<img src={postImage} alt="post photo" />
+							</div>
+						) : (
+							<div className="post-info__text">{postData.description}</div>
+						)}
 					</div>
 					<div className="post-info__functional">
 						<div className="post-info__voting">

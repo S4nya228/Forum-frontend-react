@@ -22,7 +22,14 @@ const PostCard = ({ userPosts }) => {
 						'Content-Type': 'application/json',
 					},
 				})
-				setPosts(response.data.data.post ?? response.data.data)
+				const updatedPosts = response.data.data.post ?? response.data.data
+
+				updatedPosts.map((post) => {
+					if (post.image) {
+						post.image = `${axiosInstance.defaults.baseURL}/getImage/${post.image}`
+					}
+				})
+				setPosts(updatedPosts)
 			} catch (error) {
 				console.error('Error fetching posts:', error)
 			}
@@ -122,10 +129,14 @@ const PostCard = ({ userPosts }) => {
 							</div>
 							<div className="link-post__box-info">
 								<div className="link-post__title">{post.title}</div>
-								<DescriptionPost>{post.description}</DescriptionPost>
-								<div className="link-post__image">
-									<img src={post.image} alt="image for post" />
-								</div>
+
+								{post.image ? (
+									<div className="link-post__image">
+										<img src={post.image} alt="image for post" />
+									</div>
+								) : (
+									<DescriptionPost>{post.description}</DescriptionPost>
+								)}
 							</div>
 							<div className="link-post__functional">
 								<Link
