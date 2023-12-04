@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import '../Comments/Comments.scss'
 import axiosInstance from '../../../api/axiosInstance'
 import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
 import { uk } from 'date-fns/locale'
+import { useSelector } from 'react-redux'
 
 const Comments = () => {
 	const { postId } = useParams()
 	const [comments, setComments] = useState([])
+	const [newComment, setNewComment] = useState('')
+	const token = useSelector((state) => state.auth.token)
 
 	const autoExpand = (field) => {
 		field.style.height = 'inherit'
@@ -16,20 +19,38 @@ const Comments = () => {
 		field.style.height = `${computedHeight}px`
 	}
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axiosInstance.get(
-					`/client/post/${postId}/comment/`
-				)
-				setComments(response.data.data)
-			} catch (error) {
-				console.error('Error fetching comments:', error)
-			}
+	const addComment = async () => {
+		try {
+			await axiosInstance.post(
+				`/client/post/${postId}/comment`,
+				{
+					comment: newComment,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			)
+			fetchData()
+			setNewComment('')
+		} catch (error) {
+			console.error('Error adding comment:', error)
 		}
+	}
 
-		fetchData()
+	const fetchData = useCallback(async () => {
+		try {
+			const response = await axiosInstance.get(`/client/post/${postId}/comment`)
+			setComments(response.data.data)
+		} catch (error) {
+			console.error('Error fetching comments:', error)
+		}
 	}, [postId])
+
+	useEffect(() => {
+		fetchData()
+	}, [fetchData])
 
 	return (
 		<div className="comments">
@@ -41,11 +62,13 @@ const Comments = () => {
 							placeholder="Add new comment"
 							onChange={(e) => {
 								autoExpand(e.target)
+								setNewComment(e.target.value)
 							}}
+							value={newComment}
 						></textarea>
 					</div>
 					<div className="comments__create-button">
-						<button>Comment</button>
+						<button onClick={addComment}>Comment</button>
 					</div>
 				</div>
 				<div className="comments__count">300 comments</div>
