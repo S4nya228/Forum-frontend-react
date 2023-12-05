@@ -9,6 +9,7 @@ import { NativeTypes } from 'react-dnd-html5-backend'
 import axiosInstance from '../../api/axiosInstance'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import * as postValidations from '../../validations/postValidations'
 
 const CreatePostPage = () => {
 	const {
@@ -25,6 +26,10 @@ const CreatePostPage = () => {
 	const [selectedGroup, setSelectedGroup] = useState(null)
 	const token = useSelector((state) => state.auth.token)
 	const navigate = useNavigate()
+	const [groupError, setGroupError] = useState('')
+	const [titleError, setTitleError] = useState('')
+	const [descriptionError, setDescriptionError] = useState('')
+	const [imageError, setImageError] = useState('')
 
 	const handleGroupChange = (selectedOption) => {
 		setSelectedGroup(selectedOption)
@@ -65,6 +70,23 @@ const CreatePostPage = () => {
 	const isActive = canDrop && isOver
 
 	const handleCreatePost = async () => {
+		const groupError = postValidations.validateGroup(selectedGroup)
+		const titleError = postValidations.validateTitle(title)
+		const descriptionError = postValidations.validateDescription(
+			description,
+			postMode
+		)
+		const imageError = postValidations.validateImage(selectedFile, postMode)
+
+		setGroupError(groupError)
+		setTitleError(titleError)
+		setDescriptionError(descriptionError)
+		setImageError(imageError)
+
+		if (groupError || titleError || descriptionError || imageError) {
+			return
+		}
+
 		try {
 			const postData = {
 				community_id: selectedGroup ? selectedGroup.value : null,
@@ -77,7 +99,7 @@ const CreatePostPage = () => {
 				postData.image = selectedFile
 			}
 
-			const response = await axiosInstance.post('/client/post', postData, {
+			await axiosInstance.post('/client/post', postData, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 					'Content-Type': 'multipart/form-data',
@@ -85,7 +107,6 @@ const CreatePostPage = () => {
 			})
 
 			navigate('/')
-			console.log(response)
 		} catch (error) {
 			console.error('error:', error.response)
 		}
@@ -100,6 +121,9 @@ const CreatePostPage = () => {
 					</div>
 					<div className="create-post-page__choose-group">
 						<DropDownList onChange={handleGroupChange} value={selectedGroup} />
+						{groupError && (
+							<span className="validation-error">{groupError}</span>
+						)}
 					</div>
 					<div className="create-post-page__box">
 						<div className="create-post-page__option">
@@ -118,30 +142,41 @@ const CreatePostPage = () => {
 								<span>Image</span>
 							</button>
 						</div>
-						<div className="create-post-page__title-for-post">
-							<textarea
-								placeholder="Title"
-								value={title}
-								onChange={(e) => {
-									handleChangeTitle(e)
-									autoExpand(e.target)
-								}}
-								maxLength={titleMaxLength}
-							/>
-							<span className="create-post-page__count-title">{`${title.length}/${titleMaxLength}`}</span>
-						</div>
-						{postMode === 'text' && (
-							<div className="create-post-page__description-for-post">
+						<div className="create-post-page__title-input">
+							<div className="create-post-page__title-for-post">
 								<textarea
-									placeholder="Description"
-									value={description}
+									placeholder="Title"
+									value={title}
 									onChange={(e) => {
-										handleChangeDescription(e)
+										handleChangeTitle(e)
 										autoExpand(e.target)
 									}}
-									maxLength={descriptionMaxLength}
-								></textarea>
-								<span className="create-post-page__count-description">{`${description.length}/${descriptionMaxLength}`}</span>
+									maxLength={titleMaxLength}
+								/>
+								<span className="create-post-page__count-title">{`${title.length}/${titleMaxLength}`}</span>
+							</div>
+							{titleError && (
+								<span className="validation-error">{titleError}</span>
+							)}
+						</div>
+
+						{postMode === 'text' && (
+							<div className="create-post-page__description-input">
+								<div className="create-post-page__description-for-post">
+									<textarea
+										placeholder="Description"
+										value={description}
+										onChange={(e) => {
+											handleChangeDescription(e)
+											autoExpand(e.target)
+										}}
+										maxLength={descriptionMaxLength}
+									></textarea>
+									<span className="create-post-page__count-description">{`${description.length}/${descriptionMaxLength}`}</span>
+								</div>
+								{descriptionError && (
+									<span className="validation-error">{descriptionError}</span>
+								)}
 							</div>
 						)}
 						{postMode === 'image' && (
@@ -188,6 +223,9 @@ const CreatePostPage = () => {
 										</div>
 									)}
 								</div>
+								{imageError && (
+									<span className="validation-error">{imageError}</span>
+								)}
 							</div>
 						)}
 						<div className="create-post-page__create-button">

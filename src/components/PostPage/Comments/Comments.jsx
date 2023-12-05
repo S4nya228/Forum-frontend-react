@@ -56,21 +56,27 @@ const Comments = () => {
 		<div className="comments">
 			<div className="comments__container">
 				<div className="comments__title">Comments</div>
-				<div className="comments__create">
-					<div className="comments__create-textarea">
-						<textarea
-							placeholder="Add new comment"
-							onChange={(e) => {
-								autoExpand(e.target)
-								setNewComment(e.target.value)
-							}}
-							value={newComment}
-						></textarea>
+				{token ? (
+					<div className="comments__create">
+						<div className="comments__create-textarea">
+							<textarea
+								placeholder="Add new comment"
+								onChange={(e) => {
+									autoExpand(e.target)
+									setNewComment(e.target.value)
+								}}
+								value={newComment}
+							></textarea>
+						</div>
+						<div className="comments__create-button">
+							<button onClick={addComment}>Comment</button>
+						</div>
 					</div>
-					<div className="comments__create-button">
-						<button onClick={addComment}>Comment</button>
+				) : (
+					<div className="comments__create">
+						<p>You need to be logged in to add comments.</p>
 					</div>
-				</div>
+				)}
 				<div className="comments__count">300 comments</div>
 				<div className="comments__list">
 					{comments.map((comment) => (

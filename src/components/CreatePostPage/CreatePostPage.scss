@@ -44,6 +44,9 @@
 	}
 
 	&__choose-group {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
 	}
 
 	&__box {
@@ -99,10 +102,15 @@
 		}
 	}
 
+	&__title-input {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
 	&__title-for-post {
 		display: flex;
-		align-items: center;
 		position: relative;
+
 		textarea {
 			border-radius: 6px;
 			width: 100%;
@@ -111,6 +119,7 @@
 			resize: none;
 			background-color: #2c353d;
 			color: #fff;
+			box-sizing: border-box;
 
 			&:focus {
 				box-shadow: 0 0 0 0.5px white;
@@ -127,9 +136,17 @@
 		color: #858ead;
 	}
 
+	&__description-input {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
 	&__description-for-post {
 		display: flex;
 		position: relative;
+		flex-direction: column;
+		gap: 5px;
 
 		textarea {
 			border-radius: 6px;
@@ -158,6 +175,8 @@
 
 	&__image-for-post {
 		display: flex;
+		flex-direction: column;
+		gap: 5px;
 	}
 	&__area-for-image {
 		display: flex;
@@ -283,10 +302,15 @@
 		&::after {
 			content: '';
 			display: block;
-			background-color: #858ead; // Choose your desired color
+			background-color: #858ead;
 			height: 2px;
 			width: 100%;
 			margin-top: 5px;
 		}
 	}
+}
+
+.validation-error {
+	font-size: 13px;
+	color: #ff6e80;
 }
