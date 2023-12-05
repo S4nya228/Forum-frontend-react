@@ -3,11 +3,17 @@ import PropTypes from 'prop-types'
 import './CreateGroup.scss'
 import axiosInstance from '../../api/axiosInstance'
 import { useSelector } from 'react-redux'
+import {
+	validateGroupName,
+	validateGroupType,
+} from '../../validations/groupValidations'
 
 const CreateGroup = ({ onClose }) => {
 	const [isVisible, setIsVisible] = useState(true)
 	const [groupName, setGroupName] = useState('')
 	const [groupType, setGroupType] = useState('')
+	const [nameError, setNameError] = useState('')
+	const [typeError, setTypeError] = useState('')
 	const [isNsfw, setIsNsfw] = useState(false)
 	const token = useSelector((state) => state.auth.token)
 
@@ -17,8 +23,17 @@ const CreateGroup = ({ onClose }) => {
 	}
 
 	const handleCreateGroup = async () => {
+		const nameError = validateGroupName(groupName)
+		const typeError = validateGroupType(groupType)
+
+		setNameError(nameError)
+		setTypeError(typeError)
+
+		if (nameError || typeError) {
+			return
+		}
 		try {
-			const response = await axiosInstance.post(
+			await axiosInstance.post(
 				'/client/community',
 				{
 					name: groupName,
@@ -31,7 +46,6 @@ const CreateGroup = ({ onClose }) => {
 					},
 				}
 			)
-			console.log('response:', response)
 			handleCloseClick()
 		} catch (error) {
 			console.error('error:', error.response)
@@ -51,74 +65,86 @@ const CreateGroup = ({ onClose }) => {
 					<span>Create a group</span>
 				</div>
 				<div className="create-group__name">
-					<span>Name</span>
-					<input
-						type="text"
-						placeholder="Name for your group"
-						value={groupName}
-						onChange={(e) => setGroupName(e.target.value)}
-					/>
+					<div className="create-group__name-for-group">
+						<span className="create-group__name-title">Name</span>
+						<input
+							type="text"
+							placeholder="Name for your group"
+							value={groupName}
+							onChange={(e) => {
+								setGroupName(e.target.value)
+								setNameError('')
+							}}
+						/>
+					</div>
+					{nameError && <span className="validation-error">{nameError}</span>}
 				</div>
 				<div className="create-group__types">
-					<span>Group type</span>
-					<div className="create-group__list-types">
-						<div className="create-group__type">
-							<input
-								type="radio"
-								name="groupType"
-								id="public"
-								checked={groupType === 'public'}
-								onChange={() => setGroupType('public')}
-							/>
-							<label htmlFor="public" className="create-group__radio-label">
-								<div className="create-group__information">
-									<div className="create-group__type-name">
-										<img src="/image/public_icon.svg" alt="" />
-										<p>Public</p>
+					<div className="create-group__types-for-group">
+						<span className="create-group__types-title">Group type</span>
+						<div className="create-group__list-types">
+							<div className="create-group__type">
+								<input
+									type="radio"
+									name="groupType"
+									id="public"
+									checked={groupType === 'public'}
+									onChange={() => setGroupType('public')}
+								/>
+								<label htmlFor="public" className="create-group__radio-label">
+									<div className="create-group__information">
+										<div className="create-group__type-name">
+											<img src="/image/public_icon.svg" alt="" />
+											<p>Public</p>
+										</div>
+										<span>
+											Anyone can view, post, and comment to this community
+										</span>
 									</div>
-									<span>
-										Anyone can view, post, and comment to this community
-									</span>
-								</div>
-							</label>
-						</div>
-						<div className="create-group__type">
-							<input
-								type="radio"
-								name="groupType"
-								id="restricted"
-								checked={groupType === 'restricted'}
-								onChange={() => setGroupType('restricted')}
-							/>
-							<label htmlFor="restricted" className="create-group__radio-label">
-								<div className="create-group__information">
-									<div className="create-group__type-name">
-										<img src="/image/restricted_icon.svg" alt="" />
-										<p>Restricted</p>
+								</label>
+							</div>
+							<div className="create-group__type">
+								<input
+									type="radio"
+									name="groupType"
+									id="restricted"
+									checked={groupType === 'restricted'}
+									onChange={() => setGroupType('restricted')}
+								/>
+								<label
+									htmlFor="restricted"
+									className="create-group__radio-label"
+								>
+									<div className="create-group__information">
+										<div className="create-group__type-name">
+											<img src="/image/restricted_icon.svg" alt="" />
+											<p>Restricted</p>
+										</div>
+										<span>Only approved members can view and participate</span>
 									</div>
-									<span>Only approved members can view and participate</span>
-								</div>
-							</label>
-						</div>
-						<div className="create-group__type">
-							<input
-								type="radio"
-								name="groupType"
-								id="private"
-								checked={groupType === 'private'}
-								onChange={() => setGroupType('private')}
-							/>
-							<label htmlFor="private" className="create-group__radio-label">
-								<div className="create-group__information">
-									<div className="create-group__type-name">
-										<img src="/image/private_icon.svg" alt="" />
-										<p>Private</p>
+								</label>
+							</div>
+							<div className="create-group__type">
+								<input
+									type="radio"
+									name="groupType"
+									id="private"
+									checked={groupType === 'private'}
+									onChange={() => setGroupType('private')}
+								/>
+								<label htmlFor="private" className="create-group__radio-label">
+									<div className="create-group__information">
+										<div className="create-group__type-name">
+											<img src="/image/private_icon.svg" alt="" />
+											<p>Private</p>
+										</div>
+										<span>Only approved members can view and participate</span>
 									</div>
-									<span>Only approved members can view and participate</span>
-								</div>
-							</label>
+								</label>
+							</div>
 						</div>
 					</div>
+					{typeError && <span className="validation-error">{typeError}</span>}
 				</div>
 				<div className="create-group__nsfw">
 					<span>NSFW content</span>

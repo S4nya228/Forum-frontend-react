@@ -1,16 +1,23 @@
 export const validateGroup = (selectedGroup) => {
-	return selectedGroup ? '' : 'Please select a group.'
+	if (!selectedGroup) {
+		return 'Please select a group.'
+	}
+	return null
 }
 
 export const validateTitle = (title) => {
-	return title && title.length <= 300
-		? ''
-		: 'Title is required and must be less than 300 characters.'
+	if (!title) {
+		return 'Title is required.'
+	}
+	if (title.length > 300) {
+		return 'Title is required and must be less than 300 characters.'
+	}
+	return null
 }
 
 export const validateDescription = (description, postMode) => {
 	return postMode === 'text' && (!description || description.length > 5000)
-		? 'Description is required and must be less than 5000 characters.'
+		? 'Description is required'
 		: ''
 }
 
@@ -37,5 +44,5 @@ export const validateImage = (selectedFile, postMode) => {
 		}
 	}
 
-	return ''
+	return null
 }

@@ -45,13 +45,14 @@
 	&__name {
 		display: flex;
 		flex-direction: column;
+		gap: 5px;
+	}
+
+	&__name-for-group {
+		display: flex;
+		flex-direction: column;
 
 		gap: 5px;
-
-		span {
-			color: #fff;
-			font-size: 18px;
-		}
 
 		input {
 			border-radius: 8px;
@@ -63,13 +64,23 @@
 		}
 	}
 
-	&__types {
+	&__name-title {
 		color: #fff;
+		font-size: 18px;
+	}
 
-		span {
-			font-weight: 500;
-			font-size: 18px;
-		}
+	&__types {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	&__types-for-group {
+		color: #fff;
+	}
+	&__types-title {
+		font-weight: 500;
+		font-size: 18px;
 	}
 
 	&__list-types {
@@ -231,4 +242,9 @@
 			}
 		}
 	}
+}
+
+.validation-error {
+	font-size: 13px;
+	color: #ff6e80;
 }

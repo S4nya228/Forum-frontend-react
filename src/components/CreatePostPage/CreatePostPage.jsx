@@ -112,6 +112,18 @@ const CreatePostPage = () => {
 		}
 	}
 
+	const handleReplacedTitle = (e) => {
+		setTitleError('')
+		handleChangeTitle(e)
+		autoExpand(e.target)
+	}
+
+	const handleReplacedDescription = (e) => {
+		setDescriptionError('')
+		handleChangeDescription(e)
+		autoExpand(e.target)
+	}
+
 	return (
 		<div className="create-post-page">
 			<div className="create-post-page__container">
@@ -147,10 +159,7 @@ const CreatePostPage = () => {
 								<textarea
 									placeholder="Title"
 									value={title}
-									onChange={(e) => {
-										handleChangeTitle(e)
-										autoExpand(e.target)
-									}}
+									onChange={handleReplacedTitle}
 									maxLength={titleMaxLength}
 								/>
 								<span className="create-post-page__count-title">{`${title.length}/${titleMaxLength}`}</span>
@@ -166,10 +175,7 @@ const CreatePostPage = () => {
 									<textarea
 										placeholder="Description"
 										value={description}
-										onChange={(e) => {
-											handleChangeDescription(e)
-											autoExpand(e.target)
-										}}
+										onChange={handleReplacedDescription}
 										maxLength={descriptionMaxLength}
 									></textarea>
 									<span className="create-post-page__count-description">{`${description.length}/${descriptionMaxLength}`}</span>
