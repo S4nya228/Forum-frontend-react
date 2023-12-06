@@ -1,6 +1,5 @@
 .comments {
 	width: 100%;
-	padding: 20px 20px 5px;
 
 	@media (max-width: 768px) {
 		padding: 0;
@@ -62,6 +61,16 @@
 		}
 	}
 
+	&__massage {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 1rem;
+	}
+
 	&__count {
 		color: #fff;
 		font-size: 18px;
@@ -71,6 +80,17 @@
 		@media (max-width: 768px) {
 			padding: 0 10px;
 		}
+	}
+
+	&__no-comments-message {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fb8332;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 1rem;
+		padding: 20px;
 	}
 
 	&__list {

@@ -6,6 +6,7 @@ import axiosInstance from '../../../api/axiosInstance'
 import PropTypes from 'prop-types'
 import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
+import Comments from '../Comments/Comments'
 
 const PostInformation = () => {
 	const { isListOpen, toggleList, getDropdownStyles } = useListHandling()
@@ -140,6 +141,7 @@ const PostInformation = () => {
 							)}
 						</div>
 					</div>
+					<Comments commentCount={postData.comments_count} />
 				</div>
 			) : (
 				<div>Loading...</div>
