@@ -33,6 +33,7 @@ const CreatePostPage = () => {
 
 	const handleGroupChange = (selectedOption) => {
 		setSelectedGroup(selectedOption)
+		setGroupError('')
 	}
 
 	const autoExpand = (field) => {
@@ -124,6 +125,11 @@ const CreatePostPage = () => {
 		autoExpand(e.target)
 	}
 
+	const handleReplacedFile = (e) => {
+		setImageError('')
+		handleFileChange(e)
+	}
+
 	return (
 		<div className="create-post-page">
 			<div className="create-post-page__container">
@@ -203,7 +209,7 @@ const CreatePostPage = () => {
 											<input
 												type="file"
 												className="create-post-page__input"
-												onChange={handleFileChange}
+												onChange={handleReplacedFile}
 												accept="image/png,image/jpg,image/gif,image/jpeg,image/webp"
 											/>
 											<span className="create-post-page__input-button">

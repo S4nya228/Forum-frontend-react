@@ -19,7 +19,7 @@
 		}
 	}
 
-	&__create {
+	&__create-comment {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
@@ -27,6 +27,10 @@
 	}
 
 	&__create-textarea {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+
 		textarea {
 			border-radius: 6px;
 			color: #fff;
@@ -177,4 +181,9 @@
 			background-color: #262d34;
 		}
 	}
+}
+
+.validation-error {
+	font-size: 13px;
+	color: #ff6e80;
 }

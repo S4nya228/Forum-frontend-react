@@ -9,8 +9,8 @@ export const validateTitle = (title) => {
 	if (!title) {
 		return 'Title is required.'
 	}
-	if (title.length > 300) {
-		return 'Title is required and must be less than 300 characters.'
+	if (title.length > 255) {
+		return 'Title must be less than 255 characters.'
 	}
 	return null
 }

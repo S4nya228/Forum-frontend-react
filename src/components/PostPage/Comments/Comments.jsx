@@ -6,12 +6,14 @@ import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
 import { uk } from 'date-fns/locale'
 import { useSelector } from 'react-redux'
+import { validateComments } from '../../../validations/commentValidations'
 
 const Comments = () => {
 	const { postId } = useParams()
 	const [comments, setComments] = useState([])
 	const [newComment, setNewComment] = useState('')
 	const token = useSelector((state) => state.auth.token)
+	const [commentError, setCommentError] = useState('')
 
 	const autoExpand = (field) => {
 		field.style.height = 'inherit'
@@ -20,6 +22,13 @@ const Comments = () => {
 	}
 
 	const addComment = async () => {
+		const commentError = validateComments(newComment)
+
+		setCommentError(commentError)
+
+		if (commentError) {
+			return
+		}
 		try {
 			await axiosInstance.post(
 				`/client/post/${postId}/comment`,
@@ -64,9 +73,13 @@ const Comments = () => {
 								onChange={(e) => {
 									autoExpand(e.target)
 									setNewComment(e.target.value)
+									setCommentError('')
 								}}
 								value={newComment}
 							></textarea>
+							{commentError && (
+								<span className="validation-error">{commentError}</span>
+							)}
 						</div>
 						<div className="comments__create-button">
 							<button onClick={addComment}>Comment</button>

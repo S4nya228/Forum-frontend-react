@@ -3,7 +3,7 @@ import { useState } from 'react'
 const useMaxLenght = () => {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
-	const titleMaxLength = 300
+	const titleMaxLength = 255
 	const descriptionMaxLength = 5000
 
 	const handleChangeTitle = (event) => {
