@@ -15,7 +15,11 @@ const GroupCard = () => {
 	useEffect(() => {
 		const fetchGroupData = async () => {
 			try {
-				const response = await axiosInstance.get(`/client/post/${postId}`)
+				const response = await axiosInstance.get(`/client/post/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
 				const createdDate = new Date(
 					response.data.data.community_info.created_at
 				)
@@ -30,12 +34,14 @@ const GroupCard = () => {
 					...response.data.data,
 					formattedDate: formattedDate,
 				})
+
+				setIsSubscribed(response.data.data.user_isSubscribet)
 			} catch (error) {
 				console.error('Error:', error.response)
 			}
 		}
 		fetchGroupData()
-	}, [postId])
+	}, [postId, token, isSubscribed])
 
 	const handleJoinGroup = async () => {
 		if (token) {
@@ -50,7 +56,6 @@ const GroupCard = () => {
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
-							'Content-Type': 'application/json',
 						},
 					}
 				)
