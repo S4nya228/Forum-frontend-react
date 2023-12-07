@@ -1,25 +1,27 @@
-export function validateUsername(username) {
-	if (!username) {
-		return 'Username is required.'
-	}
-	return null
-}
-
 export function validatePassword(password) {
 	if (!password) {
 		return 'Password is required.'
+	}
+	if (password.length < 8) {
+		return 'The password must contain at least 8 characters.'
 	}
 	return null
 }
 
 export function validateEmail(email) {
+	if (!email) {
+		return 'Email is required.'
+	}
 	if (!email || !/\S+@\S+\.\S+/.test(email)) {
-		return `Email address "${email}" does not contain the @ sign.`
+		return 'Invalid email address format.'
 	}
 	return null
 }
 
 export function validateName(name) {
+	if (!name) {
+		return 'Name is required.'
+	}
 	if (
 		!name ||
 		name.length < 3 ||

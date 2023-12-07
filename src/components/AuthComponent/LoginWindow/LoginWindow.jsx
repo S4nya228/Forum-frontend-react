@@ -4,7 +4,10 @@ import { setToken } from '../../../store/authSlise'
 import GoogleButton from '../GoggleButton/GoggleButton'
 import { Link, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../../api/axiosInstance'
-import { validatePassword, validateEmail } from '../Validation/ValidationAuth'
+import {
+	validatePassword,
+	validateEmail,
+} from '../../../validations/ValidationAuth'
 import '../LoginWindow/LoginWindow.scss'
 
 const LoginComponent = () => {
@@ -77,9 +80,13 @@ const LoginComponent = () => {
 								name="email"
 								id="email-label"
 								value={loginForm.email}
-								onChange={(e) =>
+								onChange={(e) => {
 									setLoginForm({ ...loginForm, email: e.target.value })
-								}
+									setError((prevError) => ({
+										...prevError,
+										email: '',
+									}))
+								}}
 								required
 							/>
 							<label htmlFor="email-label">Email</label>
@@ -99,9 +106,13 @@ const LoginComponent = () => {
 								name="password"
 								id="password-label"
 								value={loginForm.password}
-								onChange={(e) =>
+								onChange={(e) => {
 									setLoginForm({ ...loginForm, password: e.target.value })
-								}
+									setError((prevError) => ({
+										...prevError,
+										password: '',
+									}))
+								}}
 								required
 							/>
 							<label htmlFor="password-label">Password</label>

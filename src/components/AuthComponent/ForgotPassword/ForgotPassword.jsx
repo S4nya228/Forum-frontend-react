@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { validateUsername, validateEmail } from '../Validation/ValidationAuth'
+import { validateEmail } from '../../../validations/ValidationAuth'
 import { Link, useNavigate } from 'react-router-dom'
 import '../ForgotPassword/ForgotPassword.scss'
 
@@ -19,18 +19,14 @@ const ForgotPassword = () => {
 
 	const handleSubmit = () => {
 		const errors = {}
-		const usernameError = validateUsername(forgotPasswordForm.username)
-		if (usernameError) {
-			errors.username = usernameError
-		}
+
 		const emailError = validateEmail(forgotPasswordForm.email)
 		if (emailError) {
 			errors.email = emailError
 		}
 
-		if (usernameError || emailError) {
+		if (emailError) {
 			setError({
-				username: usernameError,
 				email: emailError,
 			})
 		} else {
@@ -56,32 +52,6 @@ const ForgotPassword = () => {
 					</span>
 				</div>
 				<div className="forgot-password-window__inputs">
-					<div className="forgot-password-window__username">
-						<div
-							className={`forgot-password-window__input-container ${
-								error && error.username ? 'invalid-container' : ''
-							}`}
-						>
-							<input
-								autoComplete="off"
-								type="text"
-								name="username"
-								id="username-label"
-								value={forgotPasswordForm.username}
-								onChange={(e) =>
-									setforgotPasswordForm({
-										...forgotPasswordForm,
-										username: e.target.value,
-									})
-								}
-								required
-							/>
-							<label htmlFor="username-label">Username</label>
-						</div>
-						{error && error.username && (
-							<div className="error-message">{error.username}</div>
-						)}
-					</div>
 					<div className="forgot-password-window__email">
 						<div
 							className={`forgot-password-window__input-container ${

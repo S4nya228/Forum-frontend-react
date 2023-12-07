@@ -89,7 +89,10 @@ const CreateGroup = ({ onClose }) => {
 									name="groupType"
 									id="public"
 									checked={groupType === 'public'}
-									onChange={() => setGroupType('public')}
+									onChange={() => {
+										setGroupType('public')
+										setTypeError('')
+									}}
 								/>
 								<label htmlFor="public" className="create-group__radio-label">
 									<div className="create-group__information">
@@ -109,7 +112,10 @@ const CreateGroup = ({ onClose }) => {
 									name="groupType"
 									id="restricted"
 									checked={groupType === 'restricted'}
-									onChange={() => setGroupType('restricted')}
+									onChange={() => {
+										setGroupType('restricted')
+										setTypeError('')
+									}}
 								/>
 								<label
 									htmlFor="restricted"
@@ -130,7 +136,10 @@ const CreateGroup = ({ onClose }) => {
 									name="groupType"
 									id="private"
 									checked={groupType === 'private'}
-									onChange={() => setGroupType('private')}
+									onChange={() => {
+										setGroupType('private')
+										setTypeError('')
+									}}
 								/>
 								<label htmlFor="private" className="create-group__radio-label">
 									<div className="create-group__information">

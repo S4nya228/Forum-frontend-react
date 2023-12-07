@@ -7,7 +7,7 @@ import {
 	validateEmail,
 	validateName,
 	validatePasswordComplexity,
-} from '../Validation/ValidationAuth'
+} from '../../../validations/ValidationAuth'
 import '../RegistrationWindow/RegistrationWindow.scss'
 import { useDispatch } from 'react-redux'
 

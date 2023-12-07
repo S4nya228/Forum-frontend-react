@@ -8,6 +8,7 @@ import { parseISO } from 'date-fns/esm'
 import UserAccount from './UserAccount/UserAccount'
 import PostLink from './PostLink/PostLink'
 import Another from './ButtonAnother/Another/Another'
+import VottingButtons from './VottingButtons/VottingButtons'
 
 const PostCard = ({ userPosts }) => {
 	const [posts, setPosts] = useState([])
@@ -47,45 +48,10 @@ const PostCard = ({ userPosts }) => {
 			<PostLink key={post.post_id} postId={post.post_id}>
 				<div className="link-post__container">
 					<div className="link-post__card">
-						<div className="link-post__voting">
-							<button
-								className="link-post__vote-button"
-								onClick={stopPropagation}
-							>
-								<img
-									className="arrow-up"
-									src="/image/ArrowUp.svg"
-									alt="voting arrow "
-									onMouseOver={() => {
-										document.querySelector('.arrow-up').src =
-											'/image/ArrowUpOrange.svg'
-									}}
-									onMouseOut={() => {
-										document.querySelector('.arrow-up').src =
-											'/image/ArrowUp.svg'
-									}}
-								/>
-							</button>
-							<span>{post.post_info.post_upvotes_count}</span>
-							<button
-								className="link-post__vote-button"
-								onClick={stopPropagation}
-							>
-								<img
-									className="arrow-down"
-									src="/image/ArrowDown.svg"
-									alt="voting arrow"
-									onMouseOver={() => {
-										document.querySelector('.arrow-down').src =
-											'/image/ArrowDownOrange.svg'
-									}}
-									onMouseOut={() => {
-										document.querySelector('.arrow-down').src =
-											'/image/ArrowDown.svg'
-									}}
-								/>
-							</button>
-						</div>
+						<VottingButtons
+							postId={post.post_id}
+							upvotesCount={post.post_info.post_upvotes_count}
+						/>
 						<div className="link-post__main">
 							<div className="link-post__information">
 								<div className="link-post__group">
