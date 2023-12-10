@@ -9,10 +9,12 @@ import UserAccount from './UserAccount/UserAccount'
 import PostLink from './PostLink/PostLink'
 import Another from './ButtonAnother/Another/Another'
 import VottingButtons from './VottingButtons/VottingButtons'
+import { useSelector } from 'react-redux'
 
 const PostCard = ({ userPosts }) => {
 	const [posts, setPosts] = useState([])
 	const { userId } = useParams()
+	const token = useSelector((state) => state.auth.token)
 
 	useEffect(() => {
 		const fetchPosts = async () => {
@@ -20,7 +22,7 @@ const PostCard = ({ userPosts }) => {
 				const endpoint = userPosts ? `/user/id/${userId}` : '/client/post'
 				const response = await axiosInstance.get(endpoint, {
 					headers: {
-						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
 					},
 				})
 				const updatedPosts = response.data.data.post ?? response.data.data
@@ -37,7 +39,7 @@ const PostCard = ({ userPosts }) => {
 		}
 
 		fetchPosts()
-	}, [userPosts, userId])
+	}, [token, userPosts, userId])
 
 	const stopPropagation = (event) => {
 		event.stopPropagation()
@@ -51,6 +53,7 @@ const PostCard = ({ userPosts }) => {
 						<VottingButtons
 							postId={post.post_id}
 							upvotesCount={post.post_info.post_upvotes_count}
+							initialUserVote={post.user_upvote}
 						/>
 						<div className="link-post__main">
 							<div className="link-post__information">

@@ -10,11 +10,7 @@ const PostLink = ({ postId, children }) => {
 	}
 
 	return (
-		<div
-			to={`/post/id/${postId}`}
-			onClick={navigateToPostInformation}
-			className="link-post"
-		>
+		<div onClick={navigateToPostInformation} className="link-post">
 			{children}
 		</div>
 	)

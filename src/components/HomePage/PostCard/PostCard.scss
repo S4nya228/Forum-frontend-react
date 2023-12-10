@@ -47,7 +47,8 @@
 		}
 	}
 
-	&__vote-button {
+	&__vote-button-up,
+	&__vote-button-down {
 		user-select: none;
 		padding: 2px;
 
