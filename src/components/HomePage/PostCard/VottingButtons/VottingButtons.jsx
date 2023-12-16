@@ -55,11 +55,7 @@ const VottingButtons = ({ postId, upvotesCount, initialUserVote }) => {
 			)
 
 			setUpvoteCount(response.data.post_upvotes_count)
-			if (userVote === vote) {
-				vote = null
-			}
-			setUserVote(vote)
-			console.log(vote)
+			setUserVote(userVote === vote ? null : vote)
 			if (vote === null) {
 				setArrowUpSrc('/image/ArrowUp.svg')
 				setArrowDownSrc('/image/ArrowDown.svg')

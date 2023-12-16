@@ -7,24 +7,108 @@ import PropTypes from 'prop-types'
 import { formatDistanceToNow } from 'date-fns'
 import { parseISO } from 'date-fns/esm'
 import Comments from '../Comments/Comments'
+import { useSelector } from 'react-redux'
 
 const PostInformation = () => {
 	const { isListOpen, toggleList, getDropdownStyles } = useListHandling()
 	const [postData, setPostData] = useState(null)
 	const { postId } = useParams()
+	const token = useSelector((state) => state.auth.token)
+	const [arrowUpSrc, setArrowUpSrc] = useState('/image/ArrowUp.svg')
+	const [arrowDownSrc, setArrowDownSrc] = useState('/image/ArrowDown.svg')
 
 	useEffect(() => {
 		const fetchPostData = async () => {
 			try {
-				const response = await axiosInstance.get(`/client/post/${postId}`)
+				const response = await axiosInstance.get(`/client/post/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
 
 				setPostData(response.data.data)
+				if (response.data.data.user_upvote === null) {
+					setArrowUpSrc('/image/ArrowUp.svg')
+					setArrowDownSrc('/image/ArrowDown.svg')
+				} else {
+					if (response.data.data.user_upvote) {
+						setArrowUpSrc('/image/ArrowUpOrange.svg')
+						setArrowDownSrc('/image/ArrowDown.svg')
+					} else {
+						setArrowDownSrc('/image/ArrowDownOrange.svg')
+						setArrowUpSrc('/image/ArrowUp.svg')
+					}
+				}
 			} catch (error) {
 				console.error('Error:', error)
 			}
 		}
 		fetchPostData()
-	}, [postId])
+	}, [postId, token])
+
+	const handleMouseOver = (arrowType) => {
+		if (arrowType === 'up') {
+			setArrowUpSrc('/image/ArrowUpOrange.svg')
+		} else if (arrowType === 'down') {
+			setArrowDownSrc('/image/ArrowDownOrange.svg')
+		}
+	}
+
+	const handleMouseOut = (arrowType) => {
+		if (arrowType === 'up') {
+			setArrowUpSrc(
+				postData.user_upvote === true
+					? '/image/ArrowUpOrange.svg'
+					: '/image/ArrowUp.svg'
+			)
+		} else if (arrowType === 'down') {
+			setArrowDownSrc(
+				postData.user_upvote === false
+					? '/image/ArrowDownOrange.svg'
+					: '/image/ArrowDown.svg'
+			)
+		}
+	}
+
+	const handleVote = async (vote) => {
+		try {
+			const response = await axiosInstance.post(
+				`/client/post/${postId}/upvote`,
+				{ upvote: vote },
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			)
+
+			const userVote = postData.user_upvote == vote ? null : vote
+
+			setPostData({
+				...postData,
+				post_info: {
+					...postData.post_info,
+					post_upvotes_count: response.data.post_upvotes_count,
+				},
+				user_upvote: vote,
+			})
+
+			if (userVote === null) {
+				setArrowUpSrc('/image/ArrowUp.svg')
+				setArrowDownSrc('/image/ArrowDown.svg')
+			} else {
+				if (userVote) {
+					setArrowUpSrc('/image/ArrowUpOrange.svg')
+					setArrowDownSrc('/image/ArrowDown.svg')
+				} else {
+					setArrowDownSrc('/image/ArrowDownOrange.svg')
+					setArrowUpSrc('/image/ArrowUp.svg')
+				}
+			}
+		} catch (error) {
+			console.error('Error submitting vote:', error)
+		}
+	}
 
 	const postImage =
 		postData && postData.image
@@ -73,35 +157,29 @@ const PostInformation = () => {
 					</div>
 					<div className="post-info__functional">
 						<div className="post-info__voting">
-							<button className="post-info__vote-button">
+							<button
+								className="post-info__vote-button-up"
+								onClick={() => handleVote(true)}
+								onMouseOver={() => handleMouseOver('up')}
+								onMouseOut={() => handleMouseOut('up')}
+							>
 								<img
 									className="arrow-up"
-									src="/image/ArrowUp.svg"
-									alt="voting arrow "
-									onMouseOver={() => {
-										document.querySelector('.arrow-up').src =
-											'/image/ArrowUpOrange.svg'
-									}}
-									onMouseOut={() => {
-										document.querySelector('.arrow-up').src =
-											'/image/ArrowUp.svg'
-									}}
+									src={arrowUpSrc}
+									alt="voting arrow up"
 								/>
 							</button>
 							<span>{postData.post_info.post_upvotes_count}</span>
-							<button className="post-info__vote-button">
+							<button
+								className="post-info__vote-button-down"
+								onClick={() => handleVote(false)}
+								onMouseOver={() => handleMouseOver('down')}
+								onMouseOut={() => handleMouseOut('down')}
+							>
 								<img
 									className="arrow-down"
-									src="/image/ArrowDown.svg"
-									alt="voting arrow"
-									onMouseOver={() => {
-										document.querySelector('.arrow-down').src =
-											'/image/ArrowDownOrange.svg'
-									}}
-									onMouseOut={() => {
-										document.querySelector('.arrow-down').src =
-											'/image/ArrowDown.svg'
-									}}
+									src={arrowDownSrc}
+									alt="voting arrow down"
 								/>
 							</button>
 						</div>
